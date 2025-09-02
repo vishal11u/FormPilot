@@ -7,7 +7,7 @@ export default function DemoPage() {
     name: "",
     email: "",
     mobile: "",
-    remark: ""
+    remark: "",
   });
   const [submitted, setSubmitted] = useState(false);
 
@@ -21,7 +21,7 @@ export default function DemoPage() {
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     setFormData({
       ...formData,
-      [e.target.name]: e.target.value
+      [e.target.name]: e.target.value,
     });
   };
 
@@ -31,24 +31,32 @@ export default function DemoPage() {
         <div className="w-full max-w-md">
           <div className="card p-8 bg-white/80 dark:bg-slate-800/80 backdrop-blur-sm text-center">
             <div className="w-16 h-16 bg-green-500 rounded-full flex items-center justify-center mx-auto mb-6">
-              <svg className="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+              <svg
+                className="w-8 h-8 text-white"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M5 13l4 4L19 7"
+                />
               </svg>
             </div>
-            <h1 className="text-2xl font-bold text-slate-900 dark:text-white mb-4">
-              Thank you!
-            </h1>
+            <h1 className="text-2xl font-bold text-slate-900 dark:text-white mb-4">Thank you!</h1>
             <p className="text-slate-600 dark:text-slate-300 mb-6">
               Your message has been submitted successfully. We'll get back to you soon!
             </p>
-            <button
-              onClick={() => setSubmitted(false)}
-              className="btn-primary w-full"
-            >
+            <button onClick={() => setSubmitted(false)} className="btn-primary w-full">
               Submit Another Message
             </button>
             <div className="mt-6 pt-6 border-t border-slate-200 dark:border-slate-700">
-              <Link href="/" className="text-slate-500 dark:text-slate-400 hover:text-slate-700 dark:hover:text-slate-200 text-sm transition-colors">
+              <Link
+                href="/"
+                className="text-slate-500 dark:text-slate-400 hover:text-slate-700 dark:hover:text-slate-200 text-sm transition-colors"
+              >
                 ← Back to home
               </Link>
             </div>
@@ -73,10 +81,16 @@ export default function DemoPage() {
               </span>
             </div>
             <div className="flex items-center space-x-4">
-              <Link href="/" className="text-slate-600 dark:text-slate-300 hover:text-slate-800 dark:hover:text-white transition-colors">
+              <Link
+                href="/"
+                className="text-slate-600 dark:text-slate-300 hover:text-slate-800 dark:hover:text-white transition-colors"
+              >
                 Home
               </Link>
-              <Link href="/login" className="text-slate-600 dark:text-slate-300 hover:text-slate-800 dark:hover:text-white transition-colors">
+              <Link
+                href="/login"
+                className="text-slate-600 dark:text-slate-300 hover:text-slate-800 dark:hover:text-white transition-colors"
+              >
                 Login
               </Link>
               <Link href="/signup" className="btn-primary">
@@ -100,7 +114,8 @@ export default function DemoPage() {
                 </span>
               </h1>
               <p className="text-xl text-slate-600 dark:text-slate-300 mb-8">
-                Experience the power of our lead generation forms. This demo shows exactly how your forms will look and function when embedded on your website.
+                Experience the power of our lead generation forms. This demo shows exactly how your
+                forms will look and function when embedded on your website.
               </p>
             </div>
 
@@ -108,23 +123,39 @@ export default function DemoPage() {
               <div className="flex items-center space-x-3">
                 <div className="w-6 h-6 bg-green-500 rounded-full flex items-center justify-center">
                   <svg className="w-4 h-4 text-white" fill="currentColor" viewBox="0 0 20 20">
-                    <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+                    <path
+                      fillRule="evenodd"
+                      d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+                      clipRule="evenodd"
+                    />
                   </svg>
                 </div>
-                <span className="text-slate-700 dark:text-slate-300">Professional design that converts</span>
+                <span className="text-slate-700 dark:text-slate-300">
+                  Professional design that converts
+                </span>
               </div>
               <div className="flex items-center space-x-3">
                 <div className="w-6 h-6 bg-green-500 rounded-full flex items-center justify-center">
                   <svg className="w-4 h-4 text-white" fill="currentColor" viewBox="0 0 20 20">
-                    <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+                    <path
+                      fillRule="evenodd"
+                      d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+                      clipRule="evenodd"
+                    />
                   </svg>
                 </div>
-                <span className="text-slate-700 dark:text-slate-300">Instant email notifications</span>
+                <span className="text-slate-700 dark:text-slate-300">
+                  Instant email notifications
+                </span>
               </div>
               <div className="flex items-center space-x-3">
                 <div className="w-6 h-6 bg-green-500 rounded-full flex items-center justify-center">
                   <svg className="w-4 h-4 text-white" fill="currentColor" viewBox="0 0 20 20">
-                    <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+                    <path
+                      fillRule="evenodd"
+                      d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+                      clipRule="evenodd"
+                    />
                   </svg>
                 </div>
                 <span className="text-slate-700 dark:text-slate-300">Mobile-responsive design</span>
@@ -132,7 +163,11 @@ export default function DemoPage() {
               <div className="flex items-center space-x-3">
                 <div className="w-6 h-6 bg-purple-500 rounded-full flex items-center justify-center">
                   <svg className="w-4 h-4 text-white" fill="currentColor" viewBox="0 0 20 20">
-                    <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+                    <path
+                      fillRule="evenodd"
+                      d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+                      clipRule="evenodd"
+                    />
                   </svg>
                 </div>
                 <span className="text-slate-700 dark:text-slate-300">Dynamic domain support</span>
@@ -147,7 +182,7 @@ export default function DemoPage() {
           </div>
 
           {/* Right Side - Demo Form */}
-          <div className="animate-fade-in" style={{ animationDelay: '0.2s' }}>
+          <div className="animate-fade-in" style={{ animationDelay: "0.2s" }}>
             <div className="card p-8 bg-white/80 dark:bg-slate-800/80 backdrop-blur-sm">
               <div className="text-center mb-6">
                 <h2 className="text-2xl font-bold text-slate-900 dark:text-white mb-2">
@@ -160,7 +195,10 @@ export default function DemoPage() {
 
               <form onSubmit={handleSubmit} className="space-y-6">
                 <div>
-                  <label htmlFor="name" className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-2">
+                  <label
+                    htmlFor="name"
+                    className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-2"
+                  >
                     Full Name *
                   </label>
                   <input
@@ -176,7 +214,10 @@ export default function DemoPage() {
                 </div>
 
                 <div>
-                  <label htmlFor="email" className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-2">
+                  <label
+                    htmlFor="email"
+                    className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-2"
+                  >
                     Email Address *
                   </label>
                   <input
@@ -192,7 +233,10 @@ export default function DemoPage() {
                 </div>
 
                 <div>
-                  <label htmlFor="mobile" className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-2">
+                  <label
+                    htmlFor="mobile"
+                    className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-2"
+                  >
                     Mobile Number
                   </label>
                   <input
@@ -207,7 +251,10 @@ export default function DemoPage() {
                 </div>
 
                 <div>
-                  <label htmlFor="remark" className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-2">
+                  <label
+                    htmlFor="remark"
+                    className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-2"
+                  >
                     Message
                   </label>
                   <textarea
@@ -221,17 +268,15 @@ export default function DemoPage() {
                   />
                 </div>
 
-                <button
-                  type="submit"
-                  className="btn-primary w-full py-3 text-base font-semibold"
-                >
+                <button type="submit" className="btn-primary w-full py-3 text-base font-semibold">
                   Send Message
                 </button>
               </form>
 
               <div className="mt-6 pt-6 border-t border-slate-200 dark:border-slate-700 text-center">
                 <p className="text-xs text-slate-500 dark:text-slate-400">
-                  This is a demo form. In production, submissions would be sent to your email and stored in your dashboard.
+                  This is a demo form. In production, submissions would be sent to your email and
+                  stored in your dashboard.
                 </p>
               </div>
             </div>
@@ -252,37 +297,76 @@ export default function DemoPage() {
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             <div className="text-center">
               <div className="w-16 h-16 bg-blue-100 dark:bg-blue-900/20 rounded-2xl flex items-center justify-center mx-auto mb-6">
-                <svg className="w-8 h-8 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 18h.01M8 21h8a2 2 0 002-2V5a2 2 0 00-2-2H8a2 2 0 00-2 2v14a2 2 0 002 2z" />
+                <svg
+                  className="w-8 h-8 text-blue-600"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M12 18h.01M8 21h8a2 2 0 002-2V5a2 2 0 00-2-2H8a2 2 0 00-2 2v14a2 2 0 002 2z"
+                  />
                 </svg>
               </div>
-              <h3 className="text-xl font-semibold text-slate-900 dark:text-white mb-4">Mobile First</h3>
+              <h3 className="text-xl font-semibold text-slate-900 dark:text-white mb-4">
+                Mobile First
+              </h3>
               <p className="text-slate-600 dark:text-slate-300">
-                Every form is optimized for mobile devices, ensuring the best user experience across all screen sizes.
+                Every form is optimized for mobile devices, ensuring the best user experience across
+                all screen sizes.
               </p>
             </div>
 
             <div className="text-center">
               <div className="w-16 h-16 bg-purple-100 dark:bg-purple-900/20 rounded-2xl flex items-center justify-center mx-auto mb-6">
-                <svg className="w-8 h-8 text-purple-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                <svg
+                  className="w-8 h-8 text-purple-600"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"
+                  />
                 </svg>
               </div>
-              <h3 className="text-xl font-semibold text-slate-900 dark:text-white mb-4">Instant Notifications</h3>
+              <h3 className="text-xl font-semibold text-slate-900 dark:text-white mb-4">
+                Instant Notifications
+              </h3>
               <p className="text-slate-600 dark:text-slate-300">
-                Get notified immediately when someone submits a form, so you never miss a potential lead.
+                Get notified immediately when someone submits a form, so you never miss a potential
+                lead.
               </p>
             </div>
 
             <div className="text-center">
               <div className="w-16 h-16 bg-green-100 dark:bg-green-900/20 rounded-2xl flex items-center justify-center mx-auto mb-6">
-                <svg className="w-8 h-8 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
+                <svg
+                  className="w-8 h-8 text-green-600"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M13 10V3L4 14h7v7l9-11h-7z"
+                  />
                 </svg>
               </div>
-              <h3 className="text-xl font-semibold text-slate-900 dark:text-white mb-4">High Conversion</h3>
+              <h3 className="text-xl font-semibold text-slate-900 dark:text-white mb-4">
+                High Conversion
+              </h3>
               <p className="text-slate-600 dark:text-slate-300">
-                Beautiful, professional forms that increase your conversion rates and capture more qualified leads.
+                Beautiful, professional forms that increase your conversion rates and capture more
+                qualified leads.
               </p>
             </div>
           </div>

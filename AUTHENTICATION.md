@@ -5,6 +5,7 @@ This document explains the route protection system implemented in FormPilot.
 ## Overview
 
 The authentication system uses a combination of:
+
 1. **Supabase Auth** for user authentication
 2. **React Context** for global auth state management
 3. **Route Protection Components** for client-side route guarding
@@ -12,37 +13,41 @@ The authentication system uses a combination of:
 ## Components
 
 ### 1. AuthContext (`lib/authContext.tsx`)
+
 - Provides global authentication state
 - Manages user sessions and auth state changes
 - Exposes `user`, `loading`, and `signOut` to child components
 
 ### 2. ProtectedRoute (`components/ProtectedRoute.tsx`)
+
 - Wraps pages that require authentication
 - Redirects unauthenticated users to login page
 - Shows loading spinner while checking auth status
 
 ### 3. PublicRoute (`components/PublicRoute.tsx`)
+
 - Wraps pages that should only be accessible to unauthenticated users
 - Redirects authenticated users to dashboard
 - Used for login and signup pages
 
-
-
 ## Protected Routes
 
 The following routes require authentication:
+
 - `/dashboard` - User dashboard
 - `/form-builder` - Form creation page
 
 ## Public Routes (redirect if authenticated)
 
 The following routes redirect authenticated users:
+
 - `/login` - Login page
 - `/signup` - Signup page
 
 ## Public Routes (always accessible)
 
 The following routes are always accessible:
+
 - `/` - Landing page
 - `/demo` - Demo page
 - `/api/*` - API endpoints
@@ -55,11 +60,7 @@ The following routes are always accessible:
 import ProtectedRoute from "../components/ProtectedRoute";
 
 export default function NewProtectedPage() {
-  return (
-    <ProtectedRoute>
-      {/* Your protected content here */}
-    </ProtectedRoute>
-  );
+  return <ProtectedRoute>{/* Your protected content here */}</ProtectedRoute>;
 }
 ```
 
@@ -69,11 +70,7 @@ export default function NewProtectedPage() {
 import PublicRoute from "../components/PublicRoute";
 
 export default function NewPublicPage() {
-  return (
-    <PublicRoute>
-      {/* Your public content here */}
-    </PublicRoute>
-  );
+  return <PublicRoute>{/* Your public content here */}</PublicRoute>;
 }
 ```
 

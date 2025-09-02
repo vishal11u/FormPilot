@@ -76,7 +76,10 @@ export default function SignupPage() {
           <div className="card p-8 bg-white/80 dark:bg-slate-800/80 backdrop-blur-sm">
             <form onSubmit={handleSignup} className="space-y-6">
               <div>
-                <label htmlFor="email" className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-2">
+                <label
+                  htmlFor="email"
+                  className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-2"
+                >
                   Email Address
                 </label>
                 <input
@@ -91,7 +94,10 @@ export default function SignupPage() {
               </div>
 
               <div>
-                <label htmlFor="password" className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-2">
+                <label
+                  htmlFor="password"
+                  className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-2"
+                >
                   Password
                 </label>
                 <input
@@ -107,7 +113,10 @@ export default function SignupPage() {
               </div>
 
               <div>
-                <label htmlFor="confirmPassword" className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-2">
+                <label
+                  htmlFor="confirmPassword"
+                  className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-2"
+                >
                   Confirm Password
                 </label>
                 <input
@@ -125,8 +134,18 @@ export default function SignupPage() {
               {error && (
                 <div className="bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800 rounded-lg p-4">
                   <div className="flex items-center">
-                    <svg className="w-5 h-5 text-red-600 dark:text-red-400 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                    <svg
+                      className="w-5 h-5 text-red-600 dark:text-red-400 mr-2"
+                      fill="none"
+                      stroke="currentColor"
+                      viewBox="0 0 24 24"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth={2}
+                        d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
+                      />
                     </svg>
                     <p className="text-red-600 dark:text-red-400 text-sm">{error}</p>
                   </div>
@@ -136,8 +155,18 @@ export default function SignupPage() {
               {message && (
                 <div className="bg-green-50 dark:bg-green-900/20 border border-green-200 dark:border-green-800 rounded-lg p-4">
                   <div className="flex items-center">
-                    <svg className="w-5 h-5 text-green-600 dark:text-green-400 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                    <svg
+                      className="w-5 h-5 text-green-600 dark:text-green-400 mr-2"
+                      fill="none"
+                      stroke="currentColor"
+                      viewBox="0 0 24 24"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth={2}
+                        d="M5 13l4 4L19 7"
+                      />
                     </svg>
                     <p className="text-green-600 dark:text-green-400 text-sm">{message}</p>
                   </div>
@@ -163,7 +192,10 @@ export default function SignupPage() {
             <div className="mt-6 text-center">
               <p className="text-slate-600 dark:text-slate-300">
                 Already have an account?{" "}
-                <Link href="/login" className="text-blue-600 dark:text-blue-400 hover:underline font-medium">
+                <Link
+                  href="/login"
+                  className="text-blue-600 dark:text-blue-400 hover:underline font-medium"
+                >
                   Sign in
                 </Link>
               </p>
@@ -172,7 +204,10 @@ export default function SignupPage() {
 
           {/* Back to Home */}
           <div className="text-center mt-6">
-            <Link href="/" className="text-slate-500 dark:text-slate-400 hover:text-slate-700 dark:hover:text-slate-300 transition-colors">
+            <Link
+              href="/"
+              className="text-slate-500 dark:text-slate-400 hover:text-slate-700 dark:hover:text-slate-300 transition-colors"
+            >
               ← Back to Home
             </Link>
           </div>

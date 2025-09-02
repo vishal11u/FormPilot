@@ -33,7 +33,7 @@ export default function FormOverviewPage() {
   useEffect(() => {
     const fetchFormData = async () => {
       if (!user || !formId) return;
-      
+
       // Fetch form details
       const { data: formData } = await supabase
         .from("forms")
@@ -41,26 +41,26 @@ export default function FormOverviewPage() {
         .eq("form_id", formId)
         .eq("user_id", user.id)
         .single();
-      
+
       if (formData) setForm(formData);
-      
+
       // Fetch submissions for this form
       const { data: submissionsData } = await supabase
         .from("submissions")
         .select("id, created_at")
         .eq("form_id", formId)
         .order("created_at", { ascending: false });
-      
+
       if (submissionsData) setSubmissions(submissionsData);
       setLoading(false);
     };
-    
+
     fetchFormData();
   }, [user, formId]);
 
   // Calculate statistics
   const totalSubmissions = submissions.length;
-  const monthlySubmissions = submissions.filter(sub => {
+  const monthlySubmissions = submissions.filter((sub) => {
     const thirtyDaysAgo = new Date();
     thirtyDaysAgo.setDate(thirtyDaysAgo.getDate() - 30);
     return new Date(sub.created_at) >= thirtyDaysAgo;
@@ -90,7 +90,9 @@ export default function FormOverviewPage() {
       <ProtectedRoute>
         <div className="min-h-screen bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-100 dark:from-slate-900 dark:via-slate-800 dark:to-indigo-900 flex items-center justify-center">
           <div className="text-center">
-            <h1 className="text-2xl font-bold text-slate-900 dark:text-white mb-4">Form not found</h1>
+            <h1 className="text-2xl font-bold text-slate-900 dark:text-white mb-4">
+              Form not found
+            </h1>
             <Link href="/dashboard" className="btn-primary">
               Back to Dashboard
             </Link>
@@ -116,13 +118,22 @@ export default function FormOverviewPage() {
                 </span>
               </div>
               <div className="flex items-center space-x-4">
-                <Link href="/dashboard" className="text-slate-600 dark:text-slate-300 hover:text-slate-800 dark:hover:text-white transition-colors">
+                <Link
+                  href="/dashboard"
+                  className="text-slate-600 dark:text-slate-300 hover:text-slate-800 dark:hover:text-white transition-colors"
+                >
                   Dashboard
                 </Link>
-                <Link href="/submissions" className="text-slate-600 dark:text-slate-300 hover:text-slate-800 dark:hover:text-white transition-colors">
+                <Link
+                  href="/submissions"
+                  className="text-slate-600 dark:text-slate-300 hover:text-slate-800 dark:hover:text-white transition-colors"
+                >
                   Submissions
                 </Link>
-                <Link href="/account" className="text-slate-600 dark:text-slate-300 hover:text-slate-800 dark:hover:text-white transition-colors">
+                <Link
+                  href="/account"
+                  className="text-slate-600 dark:text-slate-300 hover:text-slate-800 dark:hover:text-white transition-colors"
+                >
                   Account
                 </Link>
               </div>
@@ -135,14 +146,17 @@ export default function FormOverviewPage() {
           {/* Header */}
           <div className="mb-8">
             <div className="flex items-center space-x-4 mb-4">
-              <Link href="/dashboard" className="text-slate-600 dark:text-slate-300 hover:text-slate-800 dark:hover:text-white transition-colors">
+              <Link
+                href="/dashboard"
+                className="text-slate-600 dark:text-slate-300 hover:text-slate-800 dark:hover:text-white transition-colors"
+              >
                 ← Back to Dashboard
               </Link>
             </div>
             <h1 className="text-3xl font-bold text-slate-900 dark:text-white mb-2">
               {form.form_id}
             </h1>
-            
+
             {/* Tabs */}
             <div className="flex space-x-8 border-b border-slate-200 dark:border-slate-700">
               <button
@@ -187,9 +201,7 @@ export default function FormOverviewPage() {
                   <div className="text-4xl font-bold text-slate-900 dark:text-white mb-2">
                     {monthlySubmissions}
                   </div>
-                  <p className="text-slate-600 dark:text-slate-300">
-                    Submissions (Last 30 Days)
-                  </p>
+                  <p className="text-slate-600 dark:text-slate-300">Submissions (Last 30 Days)</p>
                 </div>
               </div>
 
@@ -197,7 +209,9 @@ export default function FormOverviewPage() {
               <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
                 {/* Submissions Chart */}
                 <div className="card p-6">
-                  <h3 className="text-lg font-semibold text-slate-900 dark:text-white mb-4">SUBMISSIONS</h3>
+                  <h3 className="text-lg font-semibold text-slate-900 dark:text-white mb-4">
+                    SUBMISSIONS
+                  </h3>
                   <div className="space-y-4">
                     <div className="flex items-center space-x-2">
                       <div className="w-3 h-3 bg-slate-400 rounded-full"></div>
@@ -212,25 +226,35 @@ export default function FormOverviewPage() {
                         No data available
                       </div>
                     </div>
-                    <p className="text-xs text-slate-500 dark:text-slate-400 text-center">LAST 30 DAYS</p>
-                    <p className="text-xs text-slate-500 dark:text-slate-400 text-center">Timezone: UTC</p>
+                    <p className="text-xs text-slate-500 dark:text-slate-400 text-center">
+                      LAST 30 DAYS
+                    </p>
+                    <p className="text-xs text-slate-500 dark:text-slate-400 text-center">
+                      Timezone: UTC
+                    </p>
                   </div>
                 </div>
 
                 {/* Submissions by Country */}
                 <div className="card p-6">
-                  <h3 className="text-lg font-semibold text-slate-900 dark:text-white mb-4">SUBMISSIONS BY COUNTRY</h3>
+                  <h3 className="text-lg font-semibold text-slate-900 dark:text-white mb-4">
+                    SUBMISSIONS BY COUNTRY
+                  </h3>
                   <div className="h-32 bg-slate-100 dark:bg-slate-700 rounded flex items-center justify-center">
                     <div className="text-center text-slate-500 dark:text-slate-400 text-sm">
                       No data available
                     </div>
                   </div>
-                  <p className="text-xs text-slate-500 dark:text-slate-400 text-center mt-2">LAST 30 DAYS</p>
+                  <p className="text-xs text-slate-500 dark:text-slate-400 text-center mt-2">
+                    LAST 30 DAYS
+                  </p>
                 </div>
 
                 {/* Submissions Status */}
                 <div className="card p-6">
-                  <h3 className="text-lg font-semibold text-slate-900 dark:text-white mb-4">SUBMISSIONS STATUS</h3>
+                  <h3 className="text-lg font-semibold text-slate-900 dark:text-white mb-4">
+                    SUBMISSIONS STATUS
+                  </h3>
                   <div className="space-y-4">
                     <div className="flex items-center space-x-2">
                       <div className="w-3 h-3 bg-blue-600 rounded-full"></div>
@@ -249,14 +273,18 @@ export default function FormOverviewPage() {
                         No data available
                       </div>
                     </div>
-                    <p className="text-xs text-slate-500 dark:text-slate-400 text-center">LAST 15 DAYS</p>
+                    <p className="text-xs text-slate-500 dark:text-slate-400 text-center">
+                      LAST 15 DAYS
+                    </p>
                   </div>
                 </div>
               </div>
 
               {/* Integration Section */}
               <div className="card p-6">
-                <h3 className="text-lg font-semibold text-slate-900 dark:text-white mb-4">INTEGRATION</h3>
+                <h3 className="text-lg font-semibold text-slate-900 dark:text-white mb-4">
+                  INTEGRATION
+                </h3>
                 <div className="space-y-4">
                   <div>
                     <label className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-2">
@@ -292,7 +320,9 @@ export default function FormOverviewPage() {
           {activeTab === "submissions" && (
             <div className="card p-6">
               <div className="text-center py-12">
-                <h3 className="text-lg font-medium text-slate-900 dark:text-white mb-2">Submissions</h3>
+                <h3 className="text-lg font-medium text-slate-900 dark:text-white mb-2">
+                  Submissions
+                </h3>
                 <p className="text-slate-600 dark:text-slate-300 mb-6">
                   View detailed submissions for this form
                 </p>
@@ -307,7 +337,9 @@ export default function FormOverviewPage() {
           {activeTab === "settings" && (
             <div className="card p-6">
               <div className="text-center py-12">
-                <h3 className="text-lg font-medium text-slate-900 dark:text-white mb-2">Form Settings</h3>
+                <h3 className="text-lg font-medium text-slate-900 dark:text-white mb-2">
+                  Form Settings
+                </h3>
                 <p className="text-slate-600 dark:text-slate-300 mb-6">
                   Configure form settings and preferences
                 </p>

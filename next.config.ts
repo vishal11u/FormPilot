@@ -6,10 +6,10 @@ const nextConfig: NextConfig = {
   images: {
     unoptimized: true,
   },
-  
+
   // Enable experimental features for better performance
   experimental: {
-    optimizePackageImports: ['@supabase/supabase-js'],
+    optimizePackageImports: ["@supabase/supabase-js"],
   },
 };
 
