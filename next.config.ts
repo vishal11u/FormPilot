@@ -1,16 +1,16 @@
 import type { NextConfig } from "next";
 
-const isProd = process.env.NODE_ENV === "production";
-
 const nextConfig: NextConfig = {
-  output: "export",
+  // Removed output: "export" to enable dynamic features like middleware and API routes
+  // This allows the authentication system to work properly
   images: {
     unoptimized: true,
   },
-
-  basePath: isProd ? "/<your-repo-name>" : "",
-  assetPrefix: isProd ? "/<your-repo-name>/" : "",
-  trailingSlash: true,
+  
+  // Enable experimental features for better performance
+  experimental: {
+    optimizePackageImports: ['@supabase/supabase-js'],
+  },
 };
 
 export default nextConfig;

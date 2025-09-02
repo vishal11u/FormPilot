@@ -3,6 +3,8 @@ import { useState } from "react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
 import { supabase } from "../../lib/supabaseClient";
+import { useAuth } from "../../lib/authContext";
+import ProtectedRoute from "../../components/ProtectedRoute";
 
 function generateFormId() {
   return Math.random().toString(36).substring(2, 8);
@@ -10,6 +12,7 @@ function generateFormId() {
 
 export default function FormBuilderPage() {
   const router = useRouter();
+  const { user } = useAuth();
   const [notifyEmail, setNotifyEmail] = useState("");
   const [redirectUrl, setRedirectUrl] = useState("");
   const [error, setError] = useState("");
@@ -19,14 +22,13 @@ export default function FormBuilderPage() {
     e.preventDefault();
     setLoading(true);
     setError("");
-    const {
-      data: { user },
-    } = await supabase.auth.getUser();
+    
     if (!user) {
       setError("Not authenticated");
       setLoading(false);
       return;
     }
+    
     const form_id = generateFormId();
     const { error: insertError } = await supabase.from("forms").insert([
       {
@@ -36,13 +38,15 @@ export default function FormBuilderPage() {
         redirect_url: redirectUrl || null,
       },
     ]);
+    
     setLoading(false);
     if (insertError) setError(insertError.message);
     else router.push("/dashboard");
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-100 dark:from-slate-900 dark:via-slate-800 dark:to-indigo-900">
+    <ProtectedRoute>
+      <div className="min-h-screen bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-100 dark:from-slate-900 dark:via-slate-800 dark:to-indigo-900">
       {/* Navigation */}
       <nav className="bg-white/80 dark:bg-slate-800/80 backdrop-blur-md border-b border-slate-200 dark:border-slate-700">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -277,6 +281,7 @@ export default function FormBuilderPage() {
           </div>
         </div>
       </div>
-    </div>
+      </div>
+    </ProtectedRoute>
   );
 }

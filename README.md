@@ -66,3 +66,28 @@ NEXT_PUBLIC_SUPABASE_ANON_KEY=your_supabase_anon_key
 - Create forms in the dashboard
 - Copy the embed code and use it in your site
 - Submissions will be saved in Supabase
+
+## Dynamic Domain Support
+
+FormPilot automatically detects your domain and generates the correct embed codes:
+
+- **Development**: Uses `http://localhost:3000` when running locally
+- **Production**: Automatically uses your actual domain when hosted
+- **No configuration needed**: Works seamlessly across environments
+
+### How it works:
+
+1. **Client-side detection**: Automatically detects the current domain
+2. **Environment variables**: Falls back to `NEXT_PUBLIC_BASE_URL` or `VERCEL_URL` if set
+3. **Smart fallback**: Defaults to localhost for development
+4. **Automatic updates**: Embed codes always use the correct domain
+
+### Environment Variables (Optional):
+
+```bash
+# For custom domain
+NEXT_PUBLIC_BASE_URL=https://yourdomain.com
+
+# For Vercel deployment (auto-detected)
+VERCEL_URL=https://yourproject.vercel.app
+```

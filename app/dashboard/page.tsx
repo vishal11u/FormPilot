@@ -1,8 +1,10 @@
 "use client";
 import { useEffect, useState } from "react";
-import { useRouter } from "next/navigation";
 import Link from "next/link";
 import { supabase } from "../../lib/supabaseClient";
+import { useAuth } from "../../lib/authContext";
+import ProtectedRoute from "../../components/ProtectedRoute";
+import { getFormSubmissionUrl } from "../../lib/utils";
 
 interface Form {
   id: string;
@@ -13,50 +15,42 @@ interface Form {
 }
 
 export default function DashboardPage() {
-  const router = useRouter();
+  const { user, signOut } = useAuth();
   const [forms, setForms] = useState<Form[]>([]);
   const [loading, setLoading] = useState(true);
-  const [user, setUser] = useState<any>(null);
 
   useEffect(() => {
-    const getUserAndForms = async () => {
-      const {
-        data: { user },
-      } = await supabase.auth.getUser();
-      if (!user) {
-        router.push("/login");
-        return;
-      }
-      setUser(user);
+    const getForms = async () => {
+      if (!user) return;
+      
       const { data, error } = await supabase
         .from("forms")
         .select("id, form_id, notify_email, redirect_url, created_at")
         .eq("user_id", user.id)
         .order("created_at", { ascending: false });
+      
       if (!error && data) setForms(data);
       setLoading(false);
     };
-    getUserAndForms();
-  }, [router]);
+    
+    getForms();
+  }, [user]);
 
   const handleLogout = async () => {
-    await supabase.auth.signOut();
-    router.push("/");
+    await signOut();
   };
 
-  if (loading) {
-    return (
-      <div className="min-h-screen bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-100 dark:from-slate-900 dark:via-slate-800 dark:to-indigo-900 flex items-center justify-center">
-        <div className="text-center">
-          <div className="w-16 h-16 border-4 border-blue-600 border-t-transparent rounded-full animate-spin mx-auto mb-4"></div>
-          <p className="text-slate-600 dark:text-slate-300">Loading your dashboard...</p>
-        </div>
-      </div>
-    );
-  }
-
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-100 dark:from-slate-900 dark:via-slate-800 dark:to-indigo-900">
+    <ProtectedRoute>
+      {loading ? (
+        <div className="min-h-screen bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-100 dark:from-slate-900 dark:via-slate-800 dark:to-indigo-900 flex items-center justify-center">
+          <div className="text-center">
+            <div className="w-16 h-16 border-4 border-blue-600 border-t-transparent rounded-full animate-spin mx-auto mb-4"></div>
+            <p className="text-slate-600 dark:text-slate-300">Loading your dashboard...</p>
+          </div>
+        </div>
+      ) : (
+        <div className="min-h-screen bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-100 dark:from-slate-900 dark:via-slate-800 dark:to-indigo-900">
       {/* Navigation */}
       <nav className="bg-white/80 dark:bg-slate-800/80 backdrop-blur-md border-b border-slate-200 dark:border-slate-700">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -73,6 +67,12 @@ export default function DashboardPage() {
               <span className="text-slate-600 dark:text-slate-300 text-sm">
                 Welcome, {user?.email}
               </span>
+              <Link href="/submissions" className="text-slate-600 dark:text-slate-300 hover:text-slate-800 dark:hover:text-white transition-colors">
+                Submissions
+              </Link>
+              <Link href="/account" className="text-slate-600 dark:text-slate-300 hover:text-slate-800 dark:hover:text-white transition-colors">
+                Account
+              </Link>
               <button
                 onClick={handleLogout}
                 className="text-slate-600 dark:text-slate-300 hover:text-slate-800 dark:hover:text-white transition-colors"
@@ -210,29 +210,38 @@ export default function DashboardPage() {
                           </p>
                         </div>
                       </div>
+                      
+                      <div className="mt-4">
+                        <Link
+                          href={`/form/${form.form_id}`}
+                          className="text-blue-600 dark:text-blue-400 hover:text-blue-800 dark:hover:text-blue-300 font-medium text-sm"
+                        >
+                          View Form Details →
+                        </Link>
+                      </div>
                     </div>
 
                     <div className="flex flex-col space-y-2">
-                      <button
-                        onClick={() => {
-                          const embedCode = `<form action="${process.env.NEXT_PUBLIC_BASE_URL || "http://localhost:3000"}/api/submit?form_id=${form.form_id}" method="POST">
+                                             <button
+                         onClick={() => {
+                           const embedCode = `<form action="${getFormSubmissionUrl(form.form_id)}" method="POST">
   <input name="name" placeholder="Name" required />
   <input name="email" type="email" placeholder="Email" required />
   <input name="mobile" placeholder="Mobile" />
   <textarea name="remark" placeholder="Message"></textarea>
   <button type="submit">Submit</button>
 </form>`;
-                          navigator.clipboard.writeText(embedCode);
-                          alert('Embed code copied to clipboard!');
-                        }}
-                        className="btn-secondary text-sm px-4 py-2"
-                      >
-                        Copy Embed Code
-                      </button>
+                           navigator.clipboard.writeText(embedCode);
+                           alert('Embed code copied to clipboard!');
+                         }}
+                         className="btn-secondary text-sm px-4 py-2"
+                       >
+                         Copy Embed Code
+                       </button>
                       
-                      <button
-                        onClick={() => {
-                          const embedCode = `<form action="${process.env.NEXT_PUBLIC_BASE_URL || "http://localhost:3000"}/api/submit?form_id=${form.form_id}" method="POST">
+                                              <button
+                          onClick={() => {
+                            const embedCode = `<form action="${getFormSubmissionUrl(form.form_id)}" method="POST">
   <input name="name" placeholder="Name" required />
   <input name="email" type="email" placeholder="Email" required />
   <input name="mobile" placeholder="Mobile" />
@@ -263,6 +272,8 @@ export default function DashboardPage() {
           )}
         </div>
       </div>
-    </div>
+        </div>
+      )}
+    </ProtectedRoute>
   );
 }

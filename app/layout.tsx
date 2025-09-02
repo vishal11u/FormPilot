@@ -1,6 +1,7 @@
 import { Metadata } from "next";
 import "./globals.css";
-
+import { AuthProvider } from "../lib/authContext";
+import { ThemeProvider } from "@/components/theme-provider";
 
 export const metadata: Metadata = {
   title: "FormPilot - Form Submission SaaS Platform",
@@ -35,14 +36,23 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en">
+    <html lang="en" suppressHydrationWarning>
       <head>
         <link rel="canonical" href="https://www.formpilot.com/" />
         <link rel="icon" href="/favicon.ico" />
         <meta name="robots" content="index, follow" />
       </head>
       <body>
-        {children}
+        <AuthProvider>
+          <ThemeProvider
+            attribute="class"
+            defaultTheme="system"
+            enableSystem
+            disableTransitionOnChange
+          >
+            {children}
+          </ThemeProvider>
+        </AuthProvider>
       </body>
     </html>
   );
