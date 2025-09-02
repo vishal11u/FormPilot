@@ -24,7 +24,7 @@ export async function POST(req: NextRequest) {
     return NextResponse.json({ error: "Invalid form_id" }, { status: 400 });
   }
 
-  // Save submission
+  // Save submission to local database
   await supabase.from("submissions").insert([{ form_id, name, email, mobile, remark }]);
 
   // Redirect if redirect_url is set
