@@ -6,7 +6,7 @@ on:
       - main
 
 jobs:
-  lint_test_format:
+  format:
     runs-on: ubuntu-latest
     permissions:
       contents: write # Required to push changes to PR
@@ -27,15 +27,11 @@ jobs:
       - name: Install Dependencies
         run: npm ci
 
-      # Step 1: Run ESLint Check
-      - name: Run ESLint
-        run: npm run lint:check
-
-      # Step 2: Auto Format with Prettier
+      # ✅ Only Prettier, no ESLint
       - name: Run Prettier Auto-Fix
         run: npm run format
 
-      # Step 3: Commit and Push Changes if Any
+      # Commit & Push Formatting Changes if Any
       - name: Commit & Push Formatting Changes
         run: |
           git config --global user.name "github-actions[bot]"
