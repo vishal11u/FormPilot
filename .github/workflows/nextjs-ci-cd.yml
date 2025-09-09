@@ -31,7 +31,6 @@ jobs:
       - name: Run Prettier Auto-Fix
         run: npm run format
 
-
       # Commit & Push Formatting Changes if Any
       - name: Commit & Push Formatting Changes
         run: |
