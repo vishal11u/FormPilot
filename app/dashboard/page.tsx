@@ -17,6 +17,7 @@ interface Form {
 export default function DashboardPage() {
   const { user, signOut } = useAuth();
   const [forms, setForms] = useState<Form[]>([]);
+  const [totalSubmissions, setTotalSubmissions] = useState(0);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
@@ -29,7 +30,20 @@ export default function DashboardPage() {
         .eq("user_id", user.id)
         .order("created_at", { ascending: false });
 
-      if (!error && data) setForms(data);
+      if (!error && data) {
+        setForms(data);
+        // Fetch total submissions across user's forms
+        const formIds = data.map((f) => f.form_id);
+        if (formIds.length > 0) {
+          const { count } = await supabase
+            .from("submissions")
+            .select("*", { count: "exact", head: true })
+            .in("form_id", formIds);
+          setTotalSubmissions(count || 0);
+        } else {
+          setTotalSubmissions(0);
+        }
+      }
       setLoading(false);
     };
 
@@ -200,7 +214,9 @@ export default function DashboardPage() {
                       <p className="text-sm font-medium text-slate-600 dark:text-slate-300">
                         Total Submissions
                       </p>
-                      <p className="text-2xl font-bold text-slate-900 dark:text-white">0</p>
+                      <p className="text-2xl font-bold text-slate-900 dark:text-white">
+                        {totalSubmissions}
+                      </p>
                     </div>
                   </div>
                 </div>
