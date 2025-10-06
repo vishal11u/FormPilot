@@ -34,6 +34,18 @@ export default function Home() {
                 Features
               </Link>
               <Link
+                href="/plans"
+                className="text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white transition-colors font-medium"
+              >
+                Plans
+              </Link>
+              <Link
+                href="/contact"
+                className="text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white transition-colors font-medium"
+              >
+                Contact
+              </Link>
+              <Link
                 href="/demo"
                 className="text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white transition-colors font-medium"
               >
@@ -478,10 +490,16 @@ export default function Home() {
                 Get Started
               </Link>
               <Link
-                href="/demo"
+                href="/plans"
                 className="border-2 border-white text-white px-8 py-4 rounded-lg font-semibold text-lg transition-all duration-200 hover:bg-white hover:text-slate-900 inline-flex items-center justify-center"
               >
-                View Demo
+                See Plans
+              </Link>
+              <Link
+                href="/contact"
+                className="border-2 border-white text-white px-8 py-4 rounded-lg font-semibold text-lg transition-all duration-200 hover:bg-white hover:text-slate-900 inline-flex items-center justify-center"
+              >
+                Contact
               </Link>
             </div>
           </motion.div>
@@ -517,23 +535,13 @@ export default function Home() {
               <h3 className="font-semibold mb-4 text-lg">COMPANY</h3>
               <ul className="space-y-3 text-slate-400">
                 <li>
-                  <Link href="#" className="hover:text-white transition-colors">
+                  <Link href="/plans" className="hover:text-white transition-colors">
                     Plans
                   </Link>
                 </li>
                 <li>
-                  <Link href="#" className="hover:text-white transition-colors">
-                    Blog
-                  </Link>
-                </li>
-                <li>
-                  <Link href="#" className="hover:text-white transition-colors">
-                    Our Team
-                  </Link>
-                </li>
-                <li>
-                  <Link href="#" className="hover:text-white transition-colors">
-                    Changelog
+                  <Link href="/contact" className="hover:text-white transition-colors">
+                    Contact
                   </Link>
                 </li>
               </ul>
@@ -542,23 +550,8 @@ export default function Home() {
               <h3 className="font-semibold mb-4 text-lg">RESOURCES</h3>
               <ul className="space-y-3 text-slate-400">
                 <li>
-                  <Link href="#" className="hover:text-white transition-colors">
-                    Library
-                  </Link>
-                </li>
-                <li>
-                  <Link href="#" className="hover:text-white transition-colors">
-                    Guides
-                  </Link>
-                </li>
-                <li>
-                  <Link href="#" className="hover:text-white transition-colors">
-                    HTML Forms
-                  </Link>
-                </li>
-                <li>
-                  <Link href="#" className="hover:text-white transition-colors">
-                    React Forms
+                  <Link href="/demo" className="hover:text-white transition-colors">
+                    Demo
                   </Link>
                 </li>
               </ul>
@@ -608,14 +601,14 @@ export default function Home() {
           <div className="border-t border-slate-800 mt-12 pt-8 text-center text-slate-400">
             <p>&copy; 2025 FormPilot, Inc. All rights reserved.</p>
             <div className="flex justify-center space-x-6 mt-4">
-              <Link href="#" className="hover:text-white transition-colors">
-                Terms of Service
+              <Link href="/terms" className="hover:text-white transition-colors">
+                Terms
               </Link>
-              <Link href="#" className="hover:text-white transition-colors">
-                Privacy Policy
+              <Link href="/privacy" className="hover:text-white transition-colors">
+                Privacy
               </Link>
-              <Link href="#" className="hover:text-white transition-colors">
-                Security
+              <Link href="/contact" className="hover:text-white transition-colors">
+                Contact
               </Link>
             </div>
           </div>

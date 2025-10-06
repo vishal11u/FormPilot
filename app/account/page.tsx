@@ -55,13 +55,15 @@ export default function AccountPage() {
 
     setLoading(true);
     try {
-      // Delete user data
-      await supabase.from("submissions").delete().eq("form_id", "temp");
-      await supabase.from("forms").delete().eq("user_id", user?.id);
-
-      // Delete user account
-      await supabase.auth.admin.deleteUser(user?.id || "");
-
+      const {
+        data: { session },
+      } = await supabase.auth.getSession();
+      const token = session?.access_token;
+      const res = await fetch("/api/account/delete", {
+        method: "POST",
+        headers: { Authorization: `Bearer ${token}` },
+      });
+      if (!res.ok) throw new Error("Delete failed");
       await signOut();
     } catch (error) {
       console.error("Error deleting account:", error);
