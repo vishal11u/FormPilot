@@ -1,7 +1,7 @@
 "use client";
+import ProtectedRoute from "@/components/ProtectedRoute";
+import { supabase } from "@/lib/supabaseClient";
 import { useEffect, useState } from "react";
-import ProtectedRoute from "../components/ProtectedRoute";
-import { supabase } from "../lib/supabaseClient";
 
 interface StatsResponse {
   users: number | null;
