@@ -12,7 +12,9 @@ export async function POST(req: NextRequest) {
 
     const url = process.env.NEXT_PUBLIC_SUPABASE_URL!;
     const anon = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!;
-    const userClient = createClient(url, anon, { global: { headers: { Authorization: `Bearer ${token}` } } });
+    const userClient = createClient(url, anon, {
+      global: { headers: { Authorization: `Bearer ${token}` } },
+    });
 
     const { data: userData, error: userErr } = await userClient.auth.getUser();
     if (userErr || !userData.user) {
@@ -39,7 +41,9 @@ export async function POST(req: NextRequest) {
 
     // Audit log
     try {
-      await supabaseAdmin.from("admin_audit").insert([{ event: "account_deleted", user_id: userId, meta: {} }]);
+      await supabaseAdmin
+        .from("admin_audit")
+        .insert([{ event: "account_deleted", user_id: userId, meta: {} }]);
     } catch {}
 
     return NextResponse.json({ success: true });
@@ -47,5 +51,3 @@ export async function POST(req: NextRequest) {
     return NextResponse.json({ error: "Failed to delete account" }, { status: 500 });
   }
 }
-
-

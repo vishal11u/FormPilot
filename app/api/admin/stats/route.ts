@@ -15,18 +15,26 @@ export async function GET(req: NextRequest) {
 
     const url = process.env.NEXT_PUBLIC_SUPABASE_URL!;
     const anon = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!;
-    const userClient = createClient(url, anon, { global: { headers: { Authorization: `Bearer ${token}` } } });
+    const userClient = createClient(url, anon, {
+      global: { headers: { Authorization: `Bearer ${token}` } },
+    });
     const { data: userData } = await userClient.auth.getUser();
     const email = userData.user?.email || null;
     if (!isAdminEmail(email)) return NextResponse.json({ error: "Forbidden" }, { status: 403 });
 
     // Counts
-    const { count: usersCount } = await supabaseAdmin.auth.admin.listUsers({ page: 1, perPage: 1 }).then(r => ({ count: r.data?.users?.length ? undefined : undefined }))
+    const { count: usersCount } = await supabaseAdmin.auth.admin
+      .listUsers({ page: 1, perPage: 1 })
+      .then((r) => ({ count: r.data?.users?.length ? undefined : undefined }))
       .catch(() => ({ count: undefined }));
     // Fallback: We can't get total count easily via listUsers without pagination; do approximate by fetching first page metadata.
 
-    const { count: formsCount } = await supabaseAdmin.from("forms").select("*", { count: "exact", head: true });
-    const { count: submissionsCount } = await supabaseAdmin.from("submissions").select("*", { count: "exact", head: true });
+    const { count: formsCount } = await supabaseAdmin
+      .from("forms")
+      .select("*", { count: "exact", head: true });
+    const { count: submissionsCount } = await supabaseAdmin
+      .from("submissions")
+      .select("*", { count: "exact", head: true });
 
     // recent activity
     const { data: recentForms } = await supabaseAdmin
@@ -51,5 +59,3 @@ export async function GET(req: NextRequest) {
     return NextResponse.json({ error: "Failed" }, { status: 500 });
   }
 }
-
-

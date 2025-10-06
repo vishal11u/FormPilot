@@ -21,7 +21,9 @@ export default function ResetPasswordPage() {
       <div className="max-w-md w-full card p-8">
         <h1 className="text-2xl font-bold text-slate-900 dark:text-white mb-4">Reset Password</h1>
         {status === "success" ? (
-          <p className="text-green-600 dark:text-green-400">Password updated. You can close this tab.</p>
+          <p className="text-green-600 dark:text-green-400">
+            Password updated. You can close this tab.
+          </p>
         ) : (
           <form onSubmit={onSubmit} className="space-y-4">
             <input
@@ -33,7 +35,9 @@ export default function ResetPasswordPage() {
               minLength={6}
               required
             />
-            <button type="submit" className="btn-primary w-full">Update Password</button>
+            <button type="submit" className="btn-primary w-full">
+              Update Password
+            </button>
             {status === "error" && (
               <p className="text-red-600 dark:text-red-400 text-sm">Failed to update password.</p>
             )}
@@ -43,5 +47,3 @@ export default function ResetPasswordPage() {
     </div>
   );
 }
-
-
