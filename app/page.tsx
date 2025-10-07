@@ -11,59 +11,95 @@ export default function Home() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center h-16">
             <motion.div
-              className="flex items-center space-x-3"
+              className="flex items-center space-x-3 cursor-pointer"
               initial={{ opacity: 0, x: -20 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.5 }}
+              onClick={() => (window.location.href = "/")}
             >
-              <div className="w-10 h-10 bg-red-600 rounded-xl flex items-center justify-center shadow-lg">
+              <div className="w-10 h-10 bg-gradient-to-r from-blue-600 to-purple-600 rounded-xl flex items-center justify-center shadow-lg">
                 <span className="text-white font-bold text-xl">F</span>
               </div>
               <span className="text-2xl font-bold text-slate-900 dark:text-white">FormPilot</span>
             </motion.div>
+            
+            {/* Mobile Menu Button */}
+            <div className="md:hidden">
+              <button 
+                onClick={() => document.getElementById('mobile-menu')?.classList.toggle('hidden')}
+                className="text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white"
+                aria-label="Toggle menu"
+              >
+                <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
+                </svg>
+              </button>
+            </div>
+            
+            {/* Desktop Navigation */}
             <motion.div
               className="hidden md:flex items-center space-x-8"
               initial={{ opacity: 0, x: 20 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.5, delay: 0.1 }}
             >
-              <Link
-                href="#features"
-                className="text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white transition-colors font-medium"
-              >
-                Features
-              </Link>
-              <Link
-                href="/plans"
-                className="text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white transition-colors font-medium"
-              >
-                Plans
-              </Link>
-              <Link
-                href="/contact"
-                className="text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white transition-colors font-medium"
-              >
-                Contact
-              </Link>
-              <Link
-                href="/demo"
-                className="text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white transition-colors font-medium"
-              >
-                Demo
-              </Link>
-              <Link
-                href="/login"
-                className="text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white transition-colors font-medium"
-              >
-                Sign In
-              </Link>
+              {[
+                { href: "#features", label: "Features" },
+                { href: "/plans", label: "Plans" },
+                { href: "/contact", label: "Contact" },
+                { href: "/demo", label: "Demo" },
+                { href: "/login", label: "Sign In" },
+              ].map((item) => (
+                <Link
+                  key={item.href}
+                  href={item.href}
+                  className="relative text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white transition-colors font-medium"
+                >
+                  {item.label}
+                </Link>
+              ))}
+
               <Link
                 href="/signup"
-                className="bg-red-600 hover:bg-red-700 text-white px-6 py-2 rounded-lg font-semibold transition-all duration-200 shadow-lg hover:shadow-xl transform hover:-translate-y-0.5"
+                className="relative px-6 py-2 rounded-lg font-semibold text-white transition-all duration-300 ease-out
+               bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600
+               bg-[length:200%_200%] animate-gradient-shift
+               shadow-lg hover:shadow-xl hover:-translate-y-0.5"
+              >
+                <span className="relative z-10">Get Started</span>
+
+                <span className="absolute inset-0 rounded-lg bg-white/20 opacity-0 hover:opacity-30 transition-opacity duration-300"></span>
+              </Link>
+            </motion.div>
+          </div>
+          
+          {/* Mobile Menu */}
+          <div id="mobile-menu" className="hidden md:hidden">
+            <div className="px-2 pt-2 pb-3 space-y-1 bg-white dark:bg-slate-900 rounded-lg shadow-lg mt-2 border border-slate-200 dark:border-slate-700">
+              {[
+                { href: "#features", label: "Features" },
+                { href: "/plans", label: "Plans" },
+                { href: "/contact", label: "Contact" },
+                { href: "/demo", label: "Demo" },
+                { href: "/login", label: "Sign In" },
+              ].map((item) => (
+                <Link
+                  key={item.href}
+                  href={item.href}
+                  className="block px-3 py-2 rounded-md text-base font-medium text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors"
+                  onClick={() => document.getElementById('mobile-menu')?.classList.add('hidden')}
+                >
+                  {item.label}
+                </Link>
+              ))}
+              <Link
+                href="/signup"
+                className="block w-full mt-3 px-3 py-2 rounded-md text-center font-medium text-white bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 transition-colors"
+                onClick={() => document.getElementById('mobile-menu')?.classList.add('hidden')}
               >
                 Get Started
               </Link>
-            </motion.div>
+            </div>
           </div>
         </div>
       </nav>
@@ -80,7 +116,7 @@ export default function Home() {
               transition={{ duration: 0.8 }}
             >
               <h1 className="text-5xl md:text-6xl font-bold text-slate-900 dark:text-white leading-tight">
-                The form solution for <span className="text-red-600">any developer</span>
+                The form solution for <span className="text-indigo-600">everyone</span>
               </h1>
               <p className="text-xl text-slate-600 dark:text-slate-400 max-w-2xl leading-relaxed">
                 Use your own frontend code. Submit to our API. We'll handle the rest.
@@ -88,7 +124,7 @@ export default function Home() {
               <div className="flex flex-col sm:flex-row gap-4">
                 <Link
                   href="/signup"
-                  className="bg-red-600 hover:bg-red-700 text-white px-8 py-4 rounded-lg font-semibold text-lg transition-all duration-200 shadow-lg hover:shadow-xl transform hover:-translate-y-0.5 inline-flex items-center justify-center"
+                  className="bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white px-8 py-4 rounded-lg font-semibold text-lg transition-all duration-200 shadow-lg hover:shadow-xl transform hover:-translate-y-0.5 inline-flex items-center justify-center"
                 >
                   Get Started
                 </Link>
@@ -307,7 +343,7 @@ export default function Home() {
                       className="w-full px-4 py-3 bg-slate-800 dark:bg-slate-600 border border-slate-600 dark:border-slate-500 rounded-lg text-white placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-transparent resize-none"
                     />
                   </div>
-                  <button className="w-full bg-red-600 hover:bg-red-700 text-white py-3 px-6 rounded-lg font-semibold transition-colors duration-200">
+                  <button className="w-full bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white py-3 px-6 rounded-lg font-semibold transition-colors duration-200">
                     Submit
                   </button>
                 </div>
@@ -468,6 +504,307 @@ export default function Home() {
         </div>
       </section>
 
+      {/* Spam Protection Section */}
+      <section className="py-20 px-4 sm:px-6 lg:px-8 bg-slate-50 dark:bg-slate-800/50">
+        <div className="max-w-7xl mx-auto">
+          <div className="text-center mb-16">
+            <h2 className="text-4xl font-bold text-slate-900 dark:text-white mb-4">Squash spam</h2>
+            <p className="text-xl text-slate-600 dark:text-slate-400 max-w-3xl mx-auto">
+              Automatic filtering, easy captchas, smart protection
+            </p>
+          </div>
+          
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-12">
+            {/* FormShield */}
+            <motion.div
+              className="flex flex-col items-center text-center"
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6 }}
+            >
+              <div className="w-24 h-24 bg-red-100 dark:bg-red-900/20 rounded-full flex items-center justify-center mb-6">
+                <svg className="w-12 h-12 text-red-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M20.618 5.984A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
+                </svg>
+              </div>
+              <h3 className="text-2xl font-semibold text-slate-900 dark:text-white mb-3">FormShield spam filter</h3>
+              <p className="text-slate-600 dark:text-slate-400">
+                Machine learning spam filtering that automatically blocks suspicious submissions
+              </p>
+            </motion.div>
+            
+            {/* reCaptcha */}
+            <motion.div
+              className="flex flex-col items-center text-center"
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6, delay: 0.2 }}
+            >
+              <div className="w-24 h-24 bg-blue-100 dark:bg-blue-900/20 rounded-full flex items-center justify-center mb-6">
+                <svg className="w-12 h-12 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
+                </svg>
+              </div>
+              <h3 className="text-2xl font-semibold text-slate-900 dark:text-white mb-3">reCaptcha</h3>
+              <p className="text-slate-600 dark:text-slate-400">
+                One click to add recaptcha protection to any form
+              </p>
+            </motion.div>
+            
+            {/* Honeypot Traps */}
+            <motion.div
+              className="flex flex-col items-center text-center"
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6, delay: 0.4 }}
+            >
+              <div className="w-24 h-24 bg-green-100 dark:bg-green-900/20 rounded-full flex items-center justify-center mb-6">
+                <svg className="w-12 h-12 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
+                </svg>
+              </div>
+              <h3 className="text-2xl font-semibold text-slate-900 dark:text-white mb-3">Honeypot Traps</h3>
+              <p className="text-slate-600 dark:text-slate-400">
+                Invisible form fields that catch bots without bothering real users
+              </p>
+            </motion.div>
+          </div>
+        </div>
+      </section>
+      
+      {/* Pricing Section */}
+      <section id="pricing" className="py-20 px-4 sm:px-6 lg:px-8 bg-white dark:bg-slate-900">
+        <div className="max-w-7xl mx-auto">
+          <div className="text-center mb-16">
+            <h2 className="text-4xl font-bold text-slate-900 dark:text-white mb-4">Simple, transparent pricing</h2>
+            <p className="text-xl text-slate-600 dark:text-slate-400 max-w-3xl mx-auto">
+              Choose the plan that's right for you and start collecting form submissions today
+            </p>
+          </div>
+          
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            {/* Personal Plan */}
+            <motion.div 
+              className="bg-white dark:bg-slate-800 rounded-2xl p-8 shadow-lg hover:shadow-xl transition-all duration-300 border border-slate-200 dark:border-slate-700"
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6 }}
+            >
+              <div className="mb-6">
+                <h3 className="text-lg font-semibold text-slate-900 dark:text-white">PERSONAL</h3>
+                <p className="text-slate-600 dark:text-slate-400 mt-1">For personal or portfolio sites</p>
+              </div>
+              
+              <div className="flex items-baseline mb-6">
+                <span className="text-4xl font-bold text-slate-900 dark:text-white">$5</span>
+                <span className="text-slate-600 dark:text-slate-400 ml-2">/mo</span>
+              </div>
+              
+              <div className="space-y-4 mb-8">
+                <div className="flex items-center">
+                  <span className="text-slate-900 dark:text-white">200</span>
+                  <span className="text-slate-600 dark:text-slate-400 ml-2">Submissions</span>
+                </div>
+                <div className="flex items-center">
+                  <span className="text-slate-900 dark:text-white">∞</span>
+                  <span className="text-slate-600 dark:text-slate-400 ml-2">Forms</span>
+                </div>
+                <div className="flex items-center">
+                  <span className="text-slate-900 dark:text-white">∞</span>
+                  <span className="text-slate-600 dark:text-slate-400 ml-2">Projects</span>
+                </div>
+                <div className="flex items-center">
+                  <span className="text-slate-900 dark:text-white">1</span>
+                  <span className="text-slate-600 dark:text-slate-400 ml-2">Team Members</span>
+                </div>
+              </div>
+              
+              <Link href="/signup" className="block w-full bg-gradient-to-r from-blue-600 to-purple-600 text-white text-center py-3 px-4 rounded-lg font-medium transition-colors duration-200">
+                Select
+              </Link>
+              
+              <div className="mt-8">
+                <h4 className="text-sm font-semibold text-slate-900 dark:text-white mb-4">WHAT'S INCLUDED:</h4>
+                <ul className="space-y-3">
+                  <li className="flex items-center text-slate-600 dark:text-slate-400">
+                    <svg className="w-5 h-5 text-green-500 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7"></path>
+                    </svg>
+                    Basic Plugins
+                  </li>
+                  <li className="flex items-center text-slate-600 dark:text-slate-400">
+                    <svg className="w-5 h-5 text-green-500 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7"></path>
+                    </svg>
+                    Export
+                  </li>
+                  <li className="flex items-center text-slate-600 dark:text-slate-400">
+                    <svg className="w-5 h-5 text-green-500 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7"></path>
+                    </svg>
+                    Spam Filtering
+                  </li>
+                  <li className="flex items-center text-slate-600 dark:text-slate-400">
+                    <svg className="w-5 h-5 text-green-500 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7"></path>
+                    </svg>
+                    Custom Redirect
+                  </li>
+                </ul>
+              </div>
+            </motion.div>
+            
+            {/* Professional Plan */}
+            <motion.div 
+              className="bg-white dark:bg-slate-800 rounded-2xl p-8 shadow-lg hover:shadow-xl transition-all duration-300 border border-slate-200 dark:border-slate-700"
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6, delay: 0.2 }}
+            >
+              <div className="mb-6">
+                <h3 className="text-lg font-semibold text-slate-900 dark:text-white">PROFESSIONAL</h3>
+                <p className="text-slate-600 dark:text-slate-400 mt-1">For freelancers and startups</p>
+              </div>
+              
+              <div className="flex items-baseline mb-6">
+                <span className="text-4xl font-bold text-slate-900 dark:text-white">$15</span>
+                <span className="text-slate-600 dark:text-slate-400 ml-2">/mo</span>
+              </div>
+              
+              <div className="space-y-4 mb-8">
+                <div className="flex items-center">
+                  <span className="text-slate-900 dark:text-white">2K</span>
+                  <span className="text-slate-600 dark:text-slate-400 ml-2">Submissions</span>
+                </div>
+                <div className="flex items-center">
+                  <span className="text-slate-900 dark:text-white">∞</span>
+                  <span className="text-slate-600 dark:text-slate-400 ml-2">Forms</span>
+                </div>
+                <div className="flex items-center">
+                  <span className="text-slate-900 dark:text-white">∞</span>
+                  <span className="text-slate-600 dark:text-slate-400 ml-2">Projects</span>
+                </div>
+                <div className="flex items-center">
+                  <span className="text-slate-900 dark:text-white">2</span>
+                  <span className="text-slate-600 dark:text-slate-400 ml-2">Team Members</span>
+                </div>
+              </div>
+              
+              <Link href="/signup" className="block w-full bg-gradient-to-r from-blue-600 to-purple-600 text-white text-center py-3 px-4 rounded-lg font-medium transition-colors duration-200">
+                Select
+              </Link>
+              
+              <div className="mt-8">
+                <h4 className="text-sm font-semibold text-slate-900 dark:text-white mb-4">ALL PERSONAL PLUS:</h4>
+                <ul className="space-y-3">
+                  <li className="flex items-center text-slate-600 dark:text-slate-400">
+                    <svg className="w-5 h-5 text-green-500 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7"></path>
+                    </svg>
+                    Premium Plugins
+                  </li>
+                  <li className="flex items-center text-slate-600 dark:text-slate-400">
+                    <svg className="w-5 h-5 text-green-500 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7"></path>
+                    </svg>
+                    Autoresponses
+                  </li>
+                  <li className="flex items-center text-slate-600 dark:text-slate-400">
+                    <svg className="w-5 h-5 text-green-500 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7"></path>
+                    </svg>
+                    Advanced Spam Control
+                  </li>
+                  <li className="flex items-center text-slate-600 dark:text-slate-400">
+                    <svg className="w-5 h-5 text-green-500 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7"></path>
+                    </svg>
+                    API Access
+                  </li>
+                </ul>
+              </div>
+            </motion.div>
+            
+            {/* Business Plan */}
+            <motion.div 
+              className="bg-white dark:bg-slate-800 rounded-2xl p-8 shadow-lg hover:shadow-xl transition-all duration-300 border border-slate-200 dark:border-slate-700"
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6, delay: 0.4 }}
+            >
+              <div className="mb-6">
+                <h3 className="text-lg font-semibold text-slate-900 dark:text-white">BUSINESS</h3>
+                <p className="text-slate-600 dark:text-slate-400 mt-1">For organizations and agencies</p>
+              </div>
+              
+              <div className="flex items-baseline mb-6">
+                <span className="text-4xl font-bold text-slate-900 dark:text-white">$55</span>
+                <span className="text-slate-600 dark:text-slate-400 ml-2">/mo</span>
+              </div>
+              
+              <div className="space-y-4 mb-8">
+                <div className="flex items-center">
+                  <span className="text-slate-900 dark:text-white">20K</span>
+                  <span className="text-slate-600 dark:text-slate-400 ml-2">Submissions</span>
+                </div>
+                <div className="flex items-center">
+                  <span className="text-slate-900 dark:text-white">∞</span>
+                  <span className="text-slate-600 dark:text-slate-400 ml-2">Forms</span>
+                </div>
+                <div className="flex items-center">
+                  <span className="text-slate-900 dark:text-white">∞</span>
+                  <span className="text-slate-600 dark:text-slate-400 ml-2">Projects</span>
+                </div>
+                <div className="flex items-center">
+                  <span className="text-slate-900 dark:text-white">∞</span>
+                  <span className="text-slate-600 dark:text-slate-400 ml-2">Team Members</span>
+                </div>
+              </div>
+              
+              <Link href="/signup" className="block w-full bg-gradient-to-r from-blue-600 to-purple-600 text-white text-center py-3 px-4 rounded-lg font-medium transition-colors duration-200">
+                Select
+              </Link>
+              
+              <div className="mt-8">
+                <h4 className="text-sm font-semibold text-slate-900 dark:text-white mb-4">ALL PROFESSIONAL PLUS:</h4>
+                <ul className="space-y-3">
+                  <li className="flex items-center text-slate-600 dark:text-slate-400">
+                    <svg className="w-5 h-5 text-green-500 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7"></path>
+                    </svg>
+                    Custom Templates
+                  </li>
+                  <li className="flex items-center text-slate-600 dark:text-slate-400">
+                    <svg className="w-5 h-5 text-green-500 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7"></path>
+                    </svg>
+                    Custom Domains
+                  </li>
+                  <li className="flex items-center text-slate-600 dark:text-slate-400">
+                    <svg className="w-5 h-5 text-green-500 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7"></path>
+                    </svg>
+                    Rules Engine
+                  </li>
+                  <li className="flex items-center text-slate-600 dark:text-slate-400">
+                    <svg className="w-5 h-5 text-green-500 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7"></path>
+                    </svg>
+                    Priority Support
+                  </li>
+                </ul>
+              </div>
+            </motion.div>
+          </div>
+        </div>
+      </section>
+
       {/* CTA Section */}
       <section className="py-20 px-4 sm:px-6 lg:px-8 bg-slate-50 dark:bg-slate-800/50">
         <div className="max-w-4xl mx-auto text-center">
@@ -485,7 +822,7 @@ export default function Home() {
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Link
                 href="/signup"
-                className="bg-red-600 hover:bg-red-700 text-white px-8 py-4 rounded-lg font-semibold text-lg transition-all duration-200 shadow-lg hover:shadow-xl transform hover:-translate-y-0.5 inline-flex items-center justify-center"
+                className="bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white px-8 py-4 rounded-lg font-semibold text-lg transition-all duration-200 shadow-lg hover:shadow-xl transform hover:-translate-y-0.5 inline-flex items-center justify-center"
               >
                 Get Started
               </Link>
@@ -497,7 +834,7 @@ export default function Home() {
               </Link>
               <Link
                 href="/contact"
-                className="border-2 border-white text-white px-8 py-4 rounded-lg font-semibold text-lg transition-all duration-200 hover:bg-white hover:text-slate-900 inline-flex items-center justify-center"
+                className="border-2 border-purple-600 text-purple-600 px-8 py-4 rounded-lg font-semibold text-lg transition-all duration-200 hover:bg-white hover:text-slate-900 inline-flex items-center justify-center"
               >
                 Contact
               </Link>
@@ -507,24 +844,44 @@ export default function Home() {
       </section>
 
       {/* Footer */}
-      <footer className="bg-slate-900 text-white py-16 px-4 sm:px-6 lg:px-8">
+      <footer className="bg-slate-900 text-white py-14 px-4 sm:px-6 lg:px-8">
         <div className="max-w-7xl mx-auto">
           <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
             <div>
               <div className="flex items-center space-x-3 mb-6">
-                <div className="w-10 h-10 bg-red-600 rounded-xl flex items-center justify-center">
+                <div className="w-10 h-10 bg-gradient-to-r from-blue-600 to-purple-600 rounded-xl flex items-center justify-center">
                   <span className="text-white font-bold text-xl">F</span>
                 </div>
                 <span className="text-2xl font-bold">FormPilot</span>
               </div>
-              <p className="text-slate-400 text-lg">The form solution for any developer</p>
+              <p className="text-slate-400 text-lg">The form solution for everyone</p>
               <div className="flex space-x-4 mt-6">
-                <a href="#" className="text-slate-400 hover:text-white transition-colors">
-                  <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
-                    <path d="M24 4.557c-.883.392-1.832.656-2.828.775 1.017-.609 1.798-1.574 2.165-2.724-.951.564-2.005.974-3.127 1.195-.897-.957-2.178-1.555-3.594-1.555-3.179 0-5.515 2.966-4.797 6.045-4.091-.205-7.719-2.165-10.148-5.144-1.29 2.213-.669 5.108 1.523 6.574-.806-.026-1.566-.247-2.229-.616-.054 2.281 1.581 4.415 3.949 4.89-.693.188-1.452.232-2.224.084.626 1.956 2.444 3.379 4.6 3.419-2.07 1.623-4.678 2.348-7.29 2.04 2.179 1.397 4.768 2.212 7.548 2.212 9.142 0 14.307-7.721 13.995-14.646.962-.695 1.797-1.562 2.457-2.549z" />
+                <a href="https://www.linkedin.com/in/vishal1-shitole/" className="text-slate-400 hover:text-white transition-colors">
+                  <svg
+                    className="w-6 h-6"
+                    fill="currentColor"
+                    viewBox="0 0 24 24"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path
+                      d="M19 0h-14c-2.76 0-5 2.24-5 5v14c0 
+    2.76 2.24 5 5 5h14c2.76 0 5-2.24 
+    5-5v-14c0-2.76-2.24-5-5-5zm-11.75 
+    20h-2.5v-10h2.5v10zm-1.25-11.27c-.83 
+    0-1.5-.67-1.5-1.5s.67-1.5 
+    1.5-1.5 1.5.67 1.5 1.5-.67 
+    1.5-1.5 1.5zm13 11.27h-2.5v-5.6c0-1.34-.03-3.07-1.87-3.07-1.87 
+    0-2.15 1.46-2.15 2.97v5.7h-2.5v-10h2.4v1.37h.03c.33-.63 
+    1.15-1.3 2.37-1.3 2.54 0 3.01 1.67 3.01 
+    3.84v6.09z"
+                    />
                   </svg>
                 </a>
-                <a href="#" className="text-slate-400 hover:text-white transition-colors">
+
+                <a
+                  href="https://github.com/vishal11u"
+                  className="text-slate-400 hover:text-white transition-colors"
+                >
                   <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
                     <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z" />
                   </svg>

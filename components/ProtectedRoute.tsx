@@ -1,4 +1,5 @@
 "use client";
+
 import { useAuth } from "../lib/authContext";
 import { useRouter } from "next/navigation";
 import { useEffect } from "react";
@@ -18,7 +19,6 @@ export default function ProtectedRoute({ children, redirectTo = "/login" }: Prot
     }
   }, [user, loading, router, redirectTo]);
 
-  // Show loading spinner while checking authentication
   if (loading) {
     return (
       <div className="min-h-screen bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-100 dark:from-slate-900 dark:via-slate-800 dark:to-indigo-900 flex items-center justify-center">
@@ -30,7 +30,6 @@ export default function ProtectedRoute({ children, redirectTo = "/login" }: Prot
     );
   }
 
-  // Don't render anything if user is not authenticated (redirect is happening)
   if (!user) {
     return null;
   }
