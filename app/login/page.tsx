@@ -4,6 +4,7 @@ import { useRouter } from "next/navigation";
 import Link from "next/link";
 import { supabase } from "../../lib/supabaseClient";
 import PublicRoute from "../../components/PublicRoute";
+import { SignIn } from "@clerk/nextjs";
 
 export default function LoginPage() {
   const router = useRouter();
@@ -48,6 +49,8 @@ export default function LoginPage() {
             <p className="text-slate-600 dark:text-slate-300">Sign in to your FormPilot account</p>
           </div>
 
+          {/* <SignIn /> */}
+
           {/* Login Form */}
           <div className="card p-8 bg-white/80 dark:bg-slate-800/80 backdrop-blur-sm">
             <form onSubmit={handleLogin} className="space-y-6">
@@ -65,14 +68,14 @@ export default function LoginPage() {
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
                   required
-                  className="input-field"
+                  className="input-field text-white"
                 />
               </div>
 
               <div>
                 <label
                   htmlFor="password"
-                  className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-2"
+                  className="block text-sm font-medium text-slate-700  dark:text-slate-300 mb-2"
                 >
                   Password
                 </label>
@@ -83,7 +86,7 @@ export default function LoginPage() {
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
                   required
-                  className="input-field"
+                  className="input-field text-white"
                 />
               </div>
 

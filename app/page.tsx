@@ -17,25 +17,43 @@ export default function Home() {
               transition={{ duration: 0.5 }}
               onClick={() => (window.location.href = "/")}
             >
-              <div className="w-10 h-10 bg-gradient-to-r from-blue-600 to-purple-600 rounded-xl flex items-center justify-center shadow-lg">
-                <span className="text-white font-bold text-xl">F</span>
+              <div className="flex items-center space-x-3">
+                <div className="w-10 h-10 bg-gradient-to-r from-blue-600 to-purple-600 rounded-xl flex items-center justify-center shadow-lg">
+                  <span className="text-white font-bold text-xl">F</span>
+                </div>
+                <div>
+                  <span className="text-xl font-bold bg-gradient-to-r from-indigo-600 to-purple-600 bg-clip-text text-transparent">
+                    FormPilot
+                  </span>
+                  <p className="text-xs text-slate-500">Lead Management</p>
+                </div>
               </div>
-              <span className="text-2xl font-bold text-slate-900 dark:text-white">FormPilot</span>
             </motion.div>
-            
+
             {/* Mobile Menu Button */}
             <div className="md:hidden">
-              <button 
-                onClick={() => document.getElementById('mobile-menu')?.classList.toggle('hidden')}
+              <button
+                onClick={() => document.getElementById("mobile-menu")?.classList.toggle("hidden")}
                 className="text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white"
                 aria-label="Toggle menu"
               >
-                <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  className="h-6 w-6"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M4 6h16M4 12h16M4 18h16"
+                  />
                 </svg>
               </button>
             </div>
-            
+
             {/* Desktop Navigation */}
             <motion.div
               className="hidden md:flex items-center space-x-8"
@@ -44,7 +62,7 @@ export default function Home() {
               transition={{ duration: 0.5, delay: 0.1 }}
             >
               {[
-                { href: "#features", label: "Features" },
+                // { href: "#features", label: "Features" },
                 { href: "/plans", label: "Plans" },
                 { href: "/contact", label: "Contact" },
                 { href: "/demo", label: "Demo" },
@@ -72,12 +90,12 @@ export default function Home() {
               </Link>
             </motion.div>
           </div>
-          
+
           {/* Mobile Menu */}
           <div id="mobile-menu" className="hidden md:hidden">
             <div className="px-2 pt-2 pb-3 space-y-1 bg-white dark:bg-slate-900 rounded-lg shadow-lg mt-2 border border-slate-200 dark:border-slate-700">
               {[
-                { href: "#features", label: "Features" },
+                // { href: "#features", label: "Features" },
                 { href: "/plans", label: "Plans" },
                 { href: "/contact", label: "Contact" },
                 { href: "/demo", label: "Demo" },
@@ -87,7 +105,7 @@ export default function Home() {
                   key={item.href}
                   href={item.href}
                   className="block px-3 py-2 rounded-md text-base font-medium text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors"
-                  onClick={() => document.getElementById('mobile-menu')?.classList.add('hidden')}
+                  onClick={() => document.getElementById("mobile-menu")?.classList.add("hidden")}
                 >
                   {item.label}
                 </Link>
@@ -95,7 +113,7 @@ export default function Home() {
               <Link
                 href="/signup"
                 className="block w-full mt-3 px-3 py-2 rounded-md text-center font-medium text-white bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 transition-colors"
-                onClick={() => document.getElementById('mobile-menu')?.classList.add('hidden')}
+                onClick={() => document.getElementById("mobile-menu")?.classList.add("hidden")}
               >
                 Get Started
               </Link>
@@ -513,7 +531,7 @@ export default function Home() {
               Automatic filtering, easy captchas, smart protection
             </p>
           </div>
-          
+
           <div className="grid grid-cols-1 md:grid-cols-3 gap-12">
             {/* FormShield */}
             <motion.div
@@ -524,16 +542,28 @@ export default function Home() {
               transition={{ duration: 0.6 }}
             >
               <div className="w-24 h-24 bg-red-100 dark:bg-red-900/20 rounded-full flex items-center justify-center mb-6">
-                <svg className="w-12 h-12 text-red-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M20.618 5.984A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
+                <svg
+                  className="w-12 h-12 text-red-600"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M20.618 5.984A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"
+                  />
                 </svg>
               </div>
-              <h3 className="text-2xl font-semibold text-slate-900 dark:text-white mb-3">FormShield spam filter</h3>
+              <h3 className="text-2xl font-semibold text-slate-900 dark:text-white mb-3">
+                FormShield spam filter
+              </h3>
               <p className="text-slate-600 dark:text-slate-400">
                 Machine learning spam filtering that automatically blocks suspicious submissions
               </p>
             </motion.div>
-            
+
             {/* reCaptcha */}
             <motion.div
               className="flex flex-col items-center text-center"
@@ -543,16 +573,28 @@ export default function Home() {
               transition={{ duration: 0.6, delay: 0.2 }}
             >
               <div className="w-24 h-24 bg-blue-100 dark:bg-blue-900/20 rounded-full flex items-center justify-center mb-6">
-                <svg className="w-12 h-12 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
+                <svg
+                  className="w-12 h-12 text-blue-600"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"
+                  />
                 </svg>
               </div>
-              <h3 className="text-2xl font-semibold text-slate-900 dark:text-white mb-3">reCaptcha</h3>
+              <h3 className="text-2xl font-semibold text-slate-900 dark:text-white mb-3">
+                reCaptcha
+              </h3>
               <p className="text-slate-600 dark:text-slate-400">
                 One click to add recaptcha protection to any form
               </p>
             </motion.div>
-            
+
             {/* Honeypot Traps */}
             <motion.div
               className="flex flex-col items-center text-center"
@@ -562,11 +604,23 @@ export default function Home() {
               transition={{ duration: 0.6, delay: 0.4 }}
             >
               <div className="w-24 h-24 bg-green-100 dark:bg-green-900/20 rounded-full flex items-center justify-center mb-6">
-                <svg className="w-12 h-12 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
+                <svg
+                  className="w-12 h-12 text-green-600"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"
+                  />
                 </svg>
               </div>
-              <h3 className="text-2xl font-semibold text-slate-900 dark:text-white mb-3">Honeypot Traps</h3>
+              <h3 className="text-2xl font-semibold text-slate-900 dark:text-white mb-3">
+                Honeypot Traps
+              </h3>
               <p className="text-slate-600 dark:text-slate-400">
                 Invisible form fields that catch bots without bothering real users
               </p>
@@ -574,236 +628,9 @@ export default function Home() {
           </div>
         </div>
       </section>
-      
+
       {/* Pricing Section */}
-      <section id="pricing" className="py-20 px-4 sm:px-6 lg:px-8 bg-white dark:bg-slate-900">
-        <div className="max-w-7xl mx-auto">
-          <div className="text-center mb-16">
-            <h2 className="text-4xl font-bold text-slate-900 dark:text-white mb-4">Simple, transparent pricing</h2>
-            <p className="text-xl text-slate-600 dark:text-slate-400 max-w-3xl mx-auto">
-              Choose the plan that's right for you and start collecting form submissions today
-            </p>
-          </div>
-          
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            {/* Personal Plan */}
-            <motion.div 
-              className="bg-white dark:bg-slate-800 rounded-2xl p-8 shadow-lg hover:shadow-xl transition-all duration-300 border border-slate-200 dark:border-slate-700"
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.6 }}
-            >
-              <div className="mb-6">
-                <h3 className="text-lg font-semibold text-slate-900 dark:text-white">PERSONAL</h3>
-                <p className="text-slate-600 dark:text-slate-400 mt-1">For personal or portfolio sites</p>
-              </div>
-              
-              <div className="flex items-baseline mb-6">
-                <span className="text-4xl font-bold text-slate-900 dark:text-white">$5</span>
-                <span className="text-slate-600 dark:text-slate-400 ml-2">/mo</span>
-              </div>
-              
-              <div className="space-y-4 mb-8">
-                <div className="flex items-center">
-                  <span className="text-slate-900 dark:text-white">200</span>
-                  <span className="text-slate-600 dark:text-slate-400 ml-2">Submissions</span>
-                </div>
-                <div className="flex items-center">
-                  <span className="text-slate-900 dark:text-white">∞</span>
-                  <span className="text-slate-600 dark:text-slate-400 ml-2">Forms</span>
-                </div>
-                <div className="flex items-center">
-                  <span className="text-slate-900 dark:text-white">∞</span>
-                  <span className="text-slate-600 dark:text-slate-400 ml-2">Projects</span>
-                </div>
-                <div className="flex items-center">
-                  <span className="text-slate-900 dark:text-white">1</span>
-                  <span className="text-slate-600 dark:text-slate-400 ml-2">Team Members</span>
-                </div>
-              </div>
-              
-              <Link href="/signup" className="block w-full bg-gradient-to-r from-blue-600 to-purple-600 text-white text-center py-3 px-4 rounded-lg font-medium transition-colors duration-200">
-                Select
-              </Link>
-              
-              <div className="mt-8">
-                <h4 className="text-sm font-semibold text-slate-900 dark:text-white mb-4">WHAT'S INCLUDED:</h4>
-                <ul className="space-y-3">
-                  <li className="flex items-center text-slate-600 dark:text-slate-400">
-                    <svg className="w-5 h-5 text-green-500 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7"></path>
-                    </svg>
-                    Basic Plugins
-                  </li>
-                  <li className="flex items-center text-slate-600 dark:text-slate-400">
-                    <svg className="w-5 h-5 text-green-500 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7"></path>
-                    </svg>
-                    Export
-                  </li>
-                  <li className="flex items-center text-slate-600 dark:text-slate-400">
-                    <svg className="w-5 h-5 text-green-500 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7"></path>
-                    </svg>
-                    Spam Filtering
-                  </li>
-                  <li className="flex items-center text-slate-600 dark:text-slate-400">
-                    <svg className="w-5 h-5 text-green-500 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7"></path>
-                    </svg>
-                    Custom Redirect
-                  </li>
-                </ul>
-              </div>
-            </motion.div>
-            
-            {/* Professional Plan */}
-            <motion.div 
-              className="bg-white dark:bg-slate-800 rounded-2xl p-8 shadow-lg hover:shadow-xl transition-all duration-300 border border-slate-200 dark:border-slate-700"
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.6, delay: 0.2 }}
-            >
-              <div className="mb-6">
-                <h3 className="text-lg font-semibold text-slate-900 dark:text-white">PROFESSIONAL</h3>
-                <p className="text-slate-600 dark:text-slate-400 mt-1">For freelancers and startups</p>
-              </div>
-              
-              <div className="flex items-baseline mb-6">
-                <span className="text-4xl font-bold text-slate-900 dark:text-white">$15</span>
-                <span className="text-slate-600 dark:text-slate-400 ml-2">/mo</span>
-              </div>
-              
-              <div className="space-y-4 mb-8">
-                <div className="flex items-center">
-                  <span className="text-slate-900 dark:text-white">2K</span>
-                  <span className="text-slate-600 dark:text-slate-400 ml-2">Submissions</span>
-                </div>
-                <div className="flex items-center">
-                  <span className="text-slate-900 dark:text-white">∞</span>
-                  <span className="text-slate-600 dark:text-slate-400 ml-2">Forms</span>
-                </div>
-                <div className="flex items-center">
-                  <span className="text-slate-900 dark:text-white">∞</span>
-                  <span className="text-slate-600 dark:text-slate-400 ml-2">Projects</span>
-                </div>
-                <div className="flex items-center">
-                  <span className="text-slate-900 dark:text-white">2</span>
-                  <span className="text-slate-600 dark:text-slate-400 ml-2">Team Members</span>
-                </div>
-              </div>
-              
-              <Link href="/signup" className="block w-full bg-gradient-to-r from-blue-600 to-purple-600 text-white text-center py-3 px-4 rounded-lg font-medium transition-colors duration-200">
-                Select
-              </Link>
-              
-              <div className="mt-8">
-                <h4 className="text-sm font-semibold text-slate-900 dark:text-white mb-4">ALL PERSONAL PLUS:</h4>
-                <ul className="space-y-3">
-                  <li className="flex items-center text-slate-600 dark:text-slate-400">
-                    <svg className="w-5 h-5 text-green-500 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7"></path>
-                    </svg>
-                    Premium Plugins
-                  </li>
-                  <li className="flex items-center text-slate-600 dark:text-slate-400">
-                    <svg className="w-5 h-5 text-green-500 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7"></path>
-                    </svg>
-                    Autoresponses
-                  </li>
-                  <li className="flex items-center text-slate-600 dark:text-slate-400">
-                    <svg className="w-5 h-5 text-green-500 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7"></path>
-                    </svg>
-                    Advanced Spam Control
-                  </li>
-                  <li className="flex items-center text-slate-600 dark:text-slate-400">
-                    <svg className="w-5 h-5 text-green-500 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7"></path>
-                    </svg>
-                    API Access
-                  </li>
-                </ul>
-              </div>
-            </motion.div>
-            
-            {/* Business Plan */}
-            <motion.div 
-              className="bg-white dark:bg-slate-800 rounded-2xl p-8 shadow-lg hover:shadow-xl transition-all duration-300 border border-slate-200 dark:border-slate-700"
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.6, delay: 0.4 }}
-            >
-              <div className="mb-6">
-                <h3 className="text-lg font-semibold text-slate-900 dark:text-white">BUSINESS</h3>
-                <p className="text-slate-600 dark:text-slate-400 mt-1">For organizations and agencies</p>
-              </div>
-              
-              <div className="flex items-baseline mb-6">
-                <span className="text-4xl font-bold text-slate-900 dark:text-white">$55</span>
-                <span className="text-slate-600 dark:text-slate-400 ml-2">/mo</span>
-              </div>
-              
-              <div className="space-y-4 mb-8">
-                <div className="flex items-center">
-                  <span className="text-slate-900 dark:text-white">20K</span>
-                  <span className="text-slate-600 dark:text-slate-400 ml-2">Submissions</span>
-                </div>
-                <div className="flex items-center">
-                  <span className="text-slate-900 dark:text-white">∞</span>
-                  <span className="text-slate-600 dark:text-slate-400 ml-2">Forms</span>
-                </div>
-                <div className="flex items-center">
-                  <span className="text-slate-900 dark:text-white">∞</span>
-                  <span className="text-slate-600 dark:text-slate-400 ml-2">Projects</span>
-                </div>
-                <div className="flex items-center">
-                  <span className="text-slate-900 dark:text-white">∞</span>
-                  <span className="text-slate-600 dark:text-slate-400 ml-2">Team Members</span>
-                </div>
-              </div>
-              
-              <Link href="/signup" className="block w-full bg-gradient-to-r from-blue-600 to-purple-600 text-white text-center py-3 px-4 rounded-lg font-medium transition-colors duration-200">
-                Select
-              </Link>
-              
-              <div className="mt-8">
-                <h4 className="text-sm font-semibold text-slate-900 dark:text-white mb-4">ALL PROFESSIONAL PLUS:</h4>
-                <ul className="space-y-3">
-                  <li className="flex items-center text-slate-600 dark:text-slate-400">
-                    <svg className="w-5 h-5 text-green-500 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7"></path>
-                    </svg>
-                    Custom Templates
-                  </li>
-                  <li className="flex items-center text-slate-600 dark:text-slate-400">
-                    <svg className="w-5 h-5 text-green-500 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7"></path>
-                    </svg>
-                    Custom Domains
-                  </li>
-                  <li className="flex items-center text-slate-600 dark:text-slate-400">
-                    <svg className="w-5 h-5 text-green-500 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7"></path>
-                    </svg>
-                    Rules Engine
-                  </li>
-                  <li className="flex items-center text-slate-600 dark:text-slate-400">
-                    <svg className="w-5 h-5 text-green-500 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7"></path>
-                    </svg>
-                    Priority Support
-                  </li>
-                </ul>
-              </div>
-            </motion.div>
-          </div>
-        </div>
-      </section>
+      
 
       {/* CTA Section */}
       <section className="py-20 px-4 sm:px-6 lg:px-8 bg-slate-50 dark:bg-slate-800/50">
@@ -826,7 +653,7 @@ export default function Home() {
               >
                 Get Started
               </Link>
-              <Link
+              {/* <Link
                 href="/plans"
                 className="border-2 border-white text-white px-8 py-4 rounded-lg font-semibold text-lg transition-all duration-200 hover:bg-white hover:text-slate-900 inline-flex items-center justify-center"
               >
@@ -837,16 +664,17 @@ export default function Home() {
                 className="border-2 border-purple-600 text-purple-600 px-8 py-4 rounded-lg font-semibold text-lg transition-all duration-200 hover:bg-white hover:text-slate-900 inline-flex items-center justify-center"
               >
                 Contact
-              </Link>
+              </Link> */}
             </div>
           </motion.div>
         </div>
       </section>
+      
 
       {/* Footer */}
       <footer className="bg-slate-900 text-white py-14 px-4 sm:px-6 lg:px-8">
         <div className="max-w-7xl mx-auto">
-          <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             <div>
               <div className="flex items-center space-x-3 mb-6">
                 <div className="w-10 h-10 bg-gradient-to-r from-blue-600 to-purple-600 rounded-xl flex items-center justify-center">
@@ -856,7 +684,10 @@ export default function Home() {
               </div>
               <p className="text-slate-400 text-lg">The form solution for everyone</p>
               <div className="flex space-x-4 mt-6">
-                <a href="https://www.linkedin.com/in/vishal1-shitole/" className="text-slate-400 hover:text-white transition-colors">
+                <a
+                  href="https://www.linkedin.com/in/vishal1-shitole/"
+                  className="text-slate-400 hover:text-white transition-colors"
+                >
                   <svg
                     className="w-6 h-6"
                     fill="currentColor"
@@ -912,47 +743,6 @@ export default function Home() {
                   </Link>
                 </li>
               </ul>
-            </div>
-            <div>
-              <h3 className="font-semibold mb-4 text-lg">COMPLIANCE</h3>
-              <div className="space-y-3">
-                <div className="flex items-center space-x-2">
-                  <div className="w-6 h-6 bg-green-500 rounded-full flex items-center justify-center">
-                    <svg className="w-4 h-4 text-white" fill="currentColor" viewBox="0 0 20 20">
-                      <path
-                        fillRule="evenodd"
-                        d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
-                        clipRule="evenodd"
-                      />
-                    </svg>
-                  </div>
-                  <span className="text-slate-400">GDPR Compliant</span>
-                </div>
-                <div className="flex items-center space-x-2">
-                  <div className="w-6 h-6 bg-green-500 rounded-full flex items-center justify-center">
-                    <svg className="w-4 h-4 text-white" fill="currentColor" viewBox="0 0 20 20">
-                      <path
-                        fillRule="evenodd"
-                        d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
-                        clipRule="evenodd"
-                      />
-                    </svg>
-                  </div>
-                  <span className="text-slate-400">CCPA Compliant</span>
-                </div>
-                <div className="flex items-center space-x-2">
-                  <div className="w-6 h-6 bg-green-500 rounded-full flex items-center justify-center">
-                    <svg className="w-4 h-4 text-white" fill="currentColor" viewBox="0 0 20 20">
-                      <path
-                        fillRule="evenodd"
-                        d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
-                        clipRule="evenodd"
-                      />
-                    </svg>
-                  </div>
-                  <span className="text-slate-400">SOC 2 Type II</span>
-                </div>
-              </div>
             </div>
           </div>
           <div className="border-t border-slate-800 mt-12 pt-8 text-center text-slate-400">
