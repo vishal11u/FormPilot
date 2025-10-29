@@ -30,7 +30,7 @@ export default function DemoPage() {
     return (
       <div className="min-h-screen bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-100 dark:from-slate-900 dark:via-slate-800 dark:to-indigo-900 flex items-center justify-center px-4">
         <div className="w-full max-w-md">
-          <div className="card p-8 bg-white/80 dark:bg-slate-800/80 backdrop-blur-sm text-center">
+          <div className=" rounded-lg shadow-xl p-8 bg-white/80 dark:bg-slate-800/80 backdrop-blur-sm text-center">
             <div className="w-16 h-16 bg-green-500 rounded-full flex items-center justify-center mx-auto mb-6">
               <svg
                 className="w-8 h-8 text-white"
@@ -88,13 +88,13 @@ export default function DemoPage() {
             <div className="flex items-center space-x-6">
               <Link
                 href="/"
-                className="flex items-center space-x-2 text-slate-600 hover:text-indigo-600 transition-colors font-medium"
+                className="md:flex hidden items-center space-x-2 text-slate-600 hover:text-indigo-600 transition-colors font-medium"
               >
                 Home
               </Link>
               <Link
                 href="/login"
-                className="flex items-center space-x-2 text-slate-600 hover:text-indigo-600 transition-colors font-medium"
+                className="md:flex hidden items-center space-x-2 text-slate-600 hover:text-indigo-600 transition-colors font-medium"
               >
                 Login
               </Link>
@@ -188,7 +188,7 @@ export default function DemoPage() {
 
           {/* Right Side - Demo Form */}
           <div className="animate-fade-in" style={{ animationDelay: "0.2s" }}>
-            <div className="card p-8 bg-white/80 dark:bg-slate-800/80 backdrop-blur-sm">
+            <div className=" shadow-lg rounded-xl p-8 bg-white dark:bg-slate-800/80 backdrop-blur-s">
               <div className="text-center mb-6">
                 <h2 className="text-2xl font-bold text-slate-900 dark:text-white mb-2">
                   Contact Us
@@ -202,7 +202,7 @@ export default function DemoPage() {
                 <div>
                   <label
                     htmlFor="name"
-                    className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-2"
+                    className="block text-sm font-medium text-slate-700 dark:text-white mb-2"
                   >
                     Full Name *
                   </label>
@@ -214,7 +214,7 @@ export default function DemoPage() {
                     value={formData.name}
                     onChange={handleInputChange}
                     required
-                    className="input-field"
+                    className="w-full p-3.5 text-sm rounded-lg bg-gray-800 text-white dark:bg-slate-700 dark:text-white placeholder:text-slate-400 dark:placeholder:text-slate-300"
                   />
                 </div>
 
@@ -233,7 +233,7 @@ export default function DemoPage() {
                     value={formData.email}
                     onChange={handleInputChange}
                     required
-                    className="input-field"
+                    className="w-full p-3.5 text-sm rounded-lg bg-gray-800 text-white dark:bg-slate-700 dark:text-white placeholder:text-slate-400 dark:placeholder:text-slate-300"
                   />
                 </div>
 
@@ -251,7 +251,7 @@ export default function DemoPage() {
                     placeholder="Enter your mobile number"
                     value={formData.mobile}
                     onChange={handleInputChange}
-                    className="input-field"
+                    className="w-full p-3.5 text-sm rounded-lg bg-gray-800 text-white dark:bg-slate-700 dark:text-white placeholder:text-slate-400 dark:placeholder:text-slate-300"
                   />
                 </div>
 
@@ -269,7 +269,7 @@ export default function DemoPage() {
                     placeholder="Tell us about your project or inquiry..."
                     value={formData.remark}
                     onChange={handleInputChange}
-                    className="input-field resize-none"
+                    className="w-full p-3.5 text-sm rounded-lg bg-gray-800 text-white dark:bg-slate-700 dark:text-white placeholder:text-slate-400 dark:placeholder:text-slate-300 resize-none"
                   />
                 </div>
 

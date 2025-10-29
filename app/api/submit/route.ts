@@ -28,12 +28,12 @@ export async function POST(req: NextRequest) {
 
   if (formError || !form) {
     if (process.env.NODE_ENV !== "production") {
-      // console.error("[submit] form lookup failed", {
-      //   form_id,
-      //   supabaseUrlPresent: !!process.env.NEXT_PUBLIC_SUPABASE_URL,
-      //   serviceKeyPresent: !!process.env.SUPABASE_SERVICE_ROLE_KEY,
-      //   formError,
-      // });
+      console.error("[submit] form lookup failed", {
+        form_id,
+        supabaseUrlPresent: !!process.env.NEXT_PUBLIC_SUPABASE_URL,
+        serviceKeyPresent: !!process.env.SUPABASE_SERVICE_ROLE_KEY,
+        formError,
+      });
     }
     return NextResponse.json({ error: "Invalid form_id" }, { status: 400 });
   }
@@ -46,15 +46,6 @@ export async function POST(req: NextRequest) {
     return NextResponse.json({ error: "Name is required" }, { status: 400 });
   }
 
-  // Basic IP+form rate limit (very simple, stateless per minute via in-memory Map alternative not available here)
-  // For demonstration: check a header-based hash window; in production use Upstash/Redis.
-  const ip = req.headers.get("x-forwarded-for") || "unknown";
-  const now = Date.now();
-  const bucket = Math.floor(now / 60000); // minute bucket
-  const fingerprint = `${form_id}:${ip}:${bucket}`;
-  // best-effort: rely on Supabase insert conflict to emulate throttle via a temp table would be ideal; skipping persistent store here
-
-  // Save submission to database with admin client (bypasses RLS for public endpoint)
   const { error: insertError } = await supabaseAdmin
     .from("submissions")
     .insert([{ form_id, name, email, mobile, remark }]);
@@ -62,17 +53,13 @@ export async function POST(req: NextRequest) {
     return NextResponse.json({ error: "Failed to save submission" }, { status: 500 });
   }
 
-  // Redirect if redirect_url is set
   if (form.redirect_url) {
     try {
       const url = new URL(form.redirect_url);
-      // Only allow http/https
       if (url.protocol === "http:" || url.protocol === "https:") {
         return NextResponse.redirect(url.toString());
       }
-    } catch {
-      // fall through to JSON success
-    }
+    } catch {}
   }
 
   return NextResponse.json({ success: true });

@@ -370,3 +370,10 @@ html {
   animation: gradient-shift 4s ease infinite;
 }
 
+@layer components {
+  .input-field {
+    @apply w-full border border-slate-300 rounded-lg p-2 focus:ring-2 focus:ring-indigo-500 focus:outline-none;
+    @apply text-slate-900 dark:text-white bg-white dark:bg-slate-700;
+    @apply placeholder:text-slate-400 dark:placeholder:text-slate-300;
+  }
+}

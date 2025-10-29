@@ -54,7 +54,7 @@ export default function ContactPage() {
             <div className="flex items-center space-x-6">
               <Link
                 href="/"
-                className="flex items-center space-x-2 text-slate-600 hover:text-indigo-600 transition-colors font-medium"
+                className="md:flex hidden items-center space-x-2 text-slate-600 hover:text-indigo-600 transition-colors font-medium"
               >
                 Home
               </Link>

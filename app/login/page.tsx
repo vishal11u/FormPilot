@@ -57,8 +57,8 @@ export default function LoginPage() {
       <div className="min-h-screen bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-100 dark:from-slate-900 dark:via-slate-800 dark:to-indigo-900 flex items-center justify-center p-4">
         <div className="max-w-md w-full">
           {/* Header */}
-          <div className="text-center mb-8">
-            <Link href="/" className="inline-flex items-center space-x-2 mb-8">
+          <div className="text-center mb-4">
+            <Link href="/" className="inline-flex items-center space-x-2 mb-4">
               <div className="w-10 h-10 bg-gradient-to-r from-blue-600 to-purple-600 rounded-lg flex items-center justify-center">
                 <span className="text-white font-bold text-xl">F</span>
               </div>
@@ -71,12 +71,12 @@ export default function LoginPage() {
           </div>
 
           {/* Login Form */}
-          <div className="card p-8 bg-white/80 dark:bg-slate-800/80 backdrop-blur-sm">
+          <div className="bg-white rounded-lg shadow-lg p-8 bg-white/80 dark:bg-slate-800/80 backdrop-blur-sm">
             {/* Google Sign In Button */}
             <button
               onClick={handleGoogleLogin}
               disabled={googleLoading}
-              className="w-full flex items-center justify-center space-x-3 px-4 py-3 border-2 border-slate-300 dark:border-slate-600 rounded-lg hover:bg-slate-50 dark:hover:bg-slate-700 transition-colors font-medium text-slate-700 dark:text-slate-200 mb-6"
+              className="w-full flex items-center bg-white justify-center space-x-3 px-4 py-3 shadow border border-gray-200 cursor-pointer rounded-lg hover:bg-slate-50 dark:hover:bg-slate-700 transition-colors font-medium text-slate-700 dark:text-slate-200 mb-6"
             >
               {googleLoading ? (
                 <div className="w-5 h-5 border-2 border-slate-600 border-t-transparent rounded-full animate-spin"></div>
@@ -130,7 +130,7 @@ export default function LoginPage() {
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
                   required
-                  className="input-field text-slate-900 dark:text-white"
+                  className="w-full p-3.5 text-sm rounded-lg bg-gray-800 text-white dark:bg-slate-700 dark:text-white placeholder:text-slate-400 dark:placeholder:text-slate-300"
                 />
               </div>
 
@@ -148,7 +148,7 @@ export default function LoginPage() {
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
                   required
-                  className="input-field text-slate-900 dark:text-white"
+                  className="w-full p-3.5 text-sm rounded-lg bg-gray-800 text-white dark:bg-slate-700 dark:text-white placeholder:text-slate-400 dark:placeholder:text-slate-300"
                 />
               </div>
 

@@ -23,8 +23,6 @@ export async function POST(req: NextRequest) {
 
     const userId = userData.user.id;
 
-    // Delete user's data (forms and related submissions)
-    // Delete submissions for all of the user's forms
     const { data: userForms } = await supabaseAdmin
       .from("forms")
       .select("form_id")

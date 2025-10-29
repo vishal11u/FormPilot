@@ -43,7 +43,6 @@ export default function SignupPage() {
       setError(error.message);
     } else {
       setMessage("Please check your email for the confirmation link!");
-      // Optionally redirect to login after a delay
       setTimeout(() => {
         router.push("/login");
       }, 3000);
@@ -55,8 +54,8 @@ export default function SignupPage() {
       <div className="min-h-screen bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-100 dark:from-slate-900 dark:via-slate-800 dark:to-indigo-900 flex items-center justify-center p-4">
         <div className="max-w-md w-full">
           {/* Header */}
-          <div className="text-center mb-8">
-            <Link href="/" className="inline-flex items-center space-x-2 mb-8">
+          <div className="text-center mb-6">
+            <Link href="/" className="inline-flex items-center space-x-2 mb-4">
               <div className="w-10 h-10 bg-gradient-to-r from-blue-600 to-purple-600 rounded-lg flex items-center justify-center">
                 <span className="text-white font-bold text-xl">F</span>
               </div>
@@ -73,7 +72,7 @@ export default function SignupPage() {
           </div>
 
           {/* Signup Form */}
-          <div className="card p-8 bg-white/80 dark:bg-slate-800/80 backdrop-blur-sm">
+          <div className="bg-white rounded-lg shadow-lg p-8 bg-white/80 dark:bg-slate-800/80 backdrop-blur-sm">
             <form onSubmit={handleSignup} className="space-y-6">
               <div>
                 <label

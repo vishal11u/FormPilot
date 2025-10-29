@@ -27,7 +27,6 @@ export async function GET(req: NextRequest) {
       .listUsers({ page: 1, perPage: 1 })
       .then((r) => ({ count: r.data?.users?.length ? undefined : undefined }))
       .catch(() => ({ count: undefined }));
-    // Fallback: We can't get total count easily via listUsers without pagination; do approximate by fetching first page metadata.
 
     const { count: formsCount } = await supabaseAdmin
       .from("forms")
