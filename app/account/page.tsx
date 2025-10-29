@@ -4,32 +4,50 @@ import Link from "next/link";
 import { supabase } from "../../lib/supabaseClient";
 import { useAuth } from "../../lib/authContext";
 import ProtectedRoute from "../../components/ProtectedRoute";
+import { useRouter } from "next/navigation";
+import {
+  FiUser,
+  FiMail,
+  FiLock,
+  FiShield,
+  FiTrash2,
+  FiEdit2,
+  FiAlertCircle,
+  FiBarChart2,
+  FiLogOut,
+  FiMenu,
+  FiInbox,
+  FiFileText,
+  FiCalendar,
+  FiTrendingUp,
+  FiCheckCircle,
+} from "react-icons/fi";
 
 export default function AccountPage() {
   const { user, signOut } = useAuth();
   const [loading, setLoading] = useState(false);
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [stats, setStats] = useState({
     totalForms: 0,
     totalSubmissions: 0,
     monthlySubmissions: 0,
   });
 
+  const router = useRouter();
+
   useEffect(() => {
     const fetchStats = async () => {
       if (!user) return;
 
-      // Fetch forms count
       const { count: formsCount } = await supabase
         .from("forms")
         .select("*", { count: "exact", head: true })
         .eq("user_id", user.id);
 
-      // Fetch submissions count
       const { count: submissionsCount } = await supabase
         .from("submissions")
         .select("*", { count: "exact", head: true });
 
-      // Fetch monthly submissions (last 30 days)
       const thirtyDaysAgo = new Date();
       thirtyDaysAgo.setDate(thirtyDaysAgo.getDate() - 30);
 
@@ -90,294 +108,313 @@ export default function AccountPage() {
     }
   };
 
+  const handleLogout = async () => {
+    await signOut();
+  };
+
   return (
     <ProtectedRoute>
-      <div className="min-h-screen bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-100 dark:from-slate-900 dark:via-slate-800 dark:to-indigo-900">
+      <div className="min-h-screen bg-gradient-to-br from-indigo-50 via-white to-purple-50">
         {/* Navigation */}
-        <nav className="bg-white/80 dark:bg-slate-800/80 backdrop-blur-md border-b border-slate-200 dark:border-slate-700">
+        <nav className="bg-white/80 backdrop-blur-xl border-b border-slate-200 sticky top-0 z-50 shadow-sm">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="flex justify-between items-center h-16">
-              <div className="flex items-center space-x-2">
-                <div className="w-8 h-8 bg-gradient-to-r from-blue-600 to-purple-600 rounded-lg flex items-center justify-center">
-                  <span className="text-white font-bold text-lg">F</span>
+              {/* Logo */}
+              <div
+                className="flex items-center space-x-3 cursor-pointer"
+                onClick={() => router.push("/dashboard")}
+              >
+                <div className="w-10 h-10 bg-gradient-to-br from-indigo-600 to-purple-600 rounded-xl flex items-center justify-center shadow-lg">
+                  <FiFileText className="text-white text-xl" />
                 </div>
-                <span className="text-xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
-                  FormPilot
-                </span>
+                <div>
+                  <span className="text-xl font-bold bg-gradient-to-r from-indigo-600 to-purple-600 bg-clip-text text-transparent">
+                    FormPilot
+                  </span>
+                  <p className="text-xs text-slate-500">Lead Management</p>
+                </div>
               </div>
-              <div className="flex items-center space-x-4">
-                <Link
-                  href="/dashboard"
-                  className="text-slate-600 dark:text-slate-300 hover:text-slate-800 dark:hover:text-white transition-colors"
-                >
-                  Dashboard
-                </Link>
+
+              {/* Desktop Navigation */}
+              <div className="hidden md:flex items-center space-x-6">
                 <Link
                   href="/submissions"
-                  className="text-slate-600 dark:text-slate-300 hover:text-slate-800 dark:hover:text-white transition-colors"
+                  className="flex items-center space-x-2 text-slate-600 hover:text-indigo-600 transition-colors font-medium"
                 >
-                  Submissions
+                  <span>Submissions</span>
                 </Link>
-                <Link href="/account" className="text-red-600 dark:text-red-400 font-medium">
-                  Account
+                <Link
+                  href="/account"
+                  className="flex items-center space-x-2 text-indigo-600 font-semibold transition-colors"
+                >
+                  <span>Account</span>
                 </Link>
+                <button
+                  onClick={handleLogout}
+                  className="flex items-center space-x-2 text-slate-600 hover:text-red-600 transition-colors font-medium"
+                >
+                  <span>Logout</span>
+                </button>
+                <div className="flex items-center space-x-3 pl-4 border-l border-slate-200">
+                  <div className="w-10 h-10 flex items-center justify-center rounded-full bg-gradient-to-br from-indigo-600 to-purple-600 text-white font-semibold shadow-md">
+                    {user?.email?.charAt(0).toUpperCase()}
+                  </div>
+                  <div className="hidden lg:block">
+                    <p className="text-sm font-medium text-slate-700">{user?.email}</p>
+                    <p className="text-xs text-slate-500">Admin</p>
+                  </div>
+                </div>
               </div>
+
+              {/* Mobile Menu Button */}
+              <button
+                onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+                className="md:hidden text-slate-600 hover:text-slate-900 p-2"
+              >
+                <FiMenu className="text-2xl" />
+              </button>
             </div>
+
+            {/* Mobile Menu */}
+            {mobileMenuOpen && (
+              <div className="md:hidden py-4 border-t border-slate-200">
+                <div className="space-y-2">
+                  <div className="px-4 py-3 bg-indigo-50 rounded-lg mb-3">
+                    <p className="text-sm font-medium text-slate-700">{user?.email}</p>
+                    <p className="text-xs text-slate-500">Admin Account</p>
+                  </div>
+                  <Link
+                    href="/submissions"
+                    className="flex items-center space-x-3 px-4 py-3 text-slate-700 hover:bg-slate-50 rounded-lg transition-colors"
+                  >
+                    <FiInbox className="text-xl" />
+                    <span className="font-medium">Submissions</span>
+                  </Link>
+                  <Link
+                    href="/account"
+                    className="flex items-center space-x-3 px-4 py-3 bg-indigo-50 text-indigo-600 rounded-lg transition-colors font-semibold"
+                  >
+                    <FiUser className="text-xl" />
+                    <span>Account</span>
+                  </Link>
+                  <button
+                    onClick={handleLogout}
+                    className="flex items-center space-x-3 px-4 py-3 text-red-600 hover:bg-red-50 rounded-lg transition-colors w-full"
+                  >
+                    <FiLogOut className="text-xl" />
+                    <span className="font-medium">Logout</span>
+                  </button>
+                </div>
+              </div>
+            )}
           </div>
         </nav>
 
         {/* Main Content */}
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
           {/* Header */}
           <div className="mb-8">
-            <h1 className="text-3xl font-bold text-slate-900 dark:text-white mb-2">
-              Account Settings
-            </h1>
-            <p className="text-slate-600 dark:text-slate-300">
-              Manage your account and preferences
-            </p>
+            <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mb-6">
+              <div>
+                <h1 className="text-4xl font-bold text-slate-900 mb-2">Account Settings </h1>
+                <p className="text-slate-600 text-lg">
+                  Manage your account information and security
+                </p>
+              </div>
+              <Link
+                href="/dashboard"
+                className="flex items-center space-x-2 bg-white text-slate-700 border-2 border-slate-200 px-5 py-3 rounded-xl font-semibold hover:border-indigo-300 hover:bg-indigo-50 transition-all"
+              >
+                <FiFileText className="text-lg" />
+                <span>Dashboard</span>
+              </Link>
+            </div>
+
+            {/* Stats Overview */}
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+              <div className="bg-white rounded-2xl p-6 shadow-sm border border-slate-100">
+                <div className="flex items-start justify-between mb-4">
+                  <div className="w-12 h-12 bg-indigo-100 rounded-xl flex items-center justify-center">
+                    <FiFileText className="text-indigo-600 text-xl" />
+                  </div>
+                </div>
+                <h3 className="text-3xl font-bold text-slate-900 mb-1">{stats.totalForms}</h3>
+                <p className="text-slate-600 font-medium">Total Forms</p>
+              </div>
+
+              <div className="bg-white rounded-2xl p-6 shadow-sm border border-slate-100">
+                <div className="flex items-start justify-between mb-4">
+                  <div className="w-12 h-12 bg-emerald-100 rounded-xl flex items-center justify-center">
+                    <FiInbox className="text-emerald-600 text-xl" />
+                  </div>
+                </div>
+                <h3 className="text-3xl font-bold text-slate-900 mb-1">{stats.totalSubmissions}</h3>
+                <p className="text-slate-600 font-medium">Total Submissions</p>
+              </div>
+
+              <div className="bg-white rounded-2xl p-6 shadow-sm border border-slate-100">
+                <div className="flex items-start justify-between mb-4">
+                  <div className="w-12 h-12 bg-purple-100 rounded-xl flex items-center justify-center">
+                    <FiCalendar className="text-purple-600 text-xl" />
+                  </div>
+                </div>
+                <h3 className="text-3xl font-bold text-slate-900 mb-1">
+                  {stats.monthlySubmissions}
+                </h3>
+                <p className="text-slate-600 font-medium">This Month</p>
+              </div>
+            </div>
           </div>
 
-          <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-            {/* Left Sidebar */}
-            <div className="lg:col-span-1">
-              <div className="card p-6">
-                <nav className="space-y-2">
-                  <Link
-                    href="#account"
-                    className="flex items-center space-x-3 px-3 py-2 text-red-600 dark:text-red-400 bg-red-50 dark:bg-red-900/20 rounded-lg font-medium"
+          <div className="space-y-6">
+            {/* Account Details Section */}
+            <div className="bg-white rounded-2xl shadow-sm border border-slate-100 p-6">
+              <div className="flex items-center space-x-3 mb-6">
+                <div className="w-10 h-10 bg-indigo-100 rounded-xl flex items-center justify-center">
+                  <FiUser className="text-indigo-600 text-lg" />
+                </div>
+                <h2 className="text-2xl font-bold text-slate-900">Account Information</h2>
+              </div>
+
+              <div className="space-y-1">
+                {/* Email */}
+                <div className="flex justify-between items-center p-4 hover:bg-slate-50 rounded-xl transition-colors">
+                  <div className="flex items-center space-x-3">
+                    <FiMail className="text-slate-400 text-lg" />
+                    <div>
+                      <p className="font-semibold text-slate-900">Email Address</p>
+                      <p className="text-sm text-slate-600">{user?.email}</p>
+                    </div>
+                  </div>
+                  <span className="flex items-center space-x-1 px-3 py-1.5 text-xs bg-emerald-100 text-emerald-700 rounded-lg font-semibold">
+                    <FiCheckCircle />
+                    <span>VERIFIED</span>
+                  </span>
+                </div>
+
+                {/* Password */}
+                <div className="flex justify-between items-center p-4 hover:bg-slate-50 rounded-xl transition-colors">
+                  <div className="flex items-center space-x-3">
+                    <FiLock className="text-slate-400 text-lg" />
+                    <div>
+                      <p className="font-semibold text-slate-900">Password</p>
+                      <p className="text-sm text-slate-600">••••••••••</p>
+                    </div>
+                  </div>
+                  <button
+                    onClick={handlePasswordReset}
+                    className="flex items-center space-x-2 text-indigo-600 hover:text-indigo-700 font-medium px-4 py-2 hover:bg-indigo-50 rounded-lg transition-colors"
                   >
-                    <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        strokeWidth={2}
-                        d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"
-                      />
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        strokeWidth={2}
-                        d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"
-                      />
-                    </svg>
-                    <span>Account</span>
-                  </Link>
-                  <Link
-                    href="#team"
-                    className="flex items-center space-x-3 px-3 py-2 text-slate-600 dark:text-slate-300 hover:text-slate-800 dark:hover:text-white transition-colors"
-                  >
-                    <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        strokeWidth={2}
-                        d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197m13.5-9a2.5 2.5 0 11-5 0 2.5 2.5 0 015 0z"
-                      />
-                    </svg>
-                    <span>Team</span>
-                  </Link>
-                  <Link
-                    href="#billing"
-                    className="flex items-center space-x-3 px-3 py-2 text-slate-600 dark:text-slate-300 hover:text-slate-800 dark:hover:text-white transition-colors"
-                  >
-                    <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        strokeWidth={2}
-                        d="M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z"
-                      />
-                    </svg>
-                    <span>Billing</span>
-                  </Link>
-                  <Link
-                    href="#domains"
-                    className="flex items-center space-x-3 px-3 py-2 text-slate-600 dark:text-slate-300 hover:text-slate-800 dark:hover:text-white transition-colors"
-                  >
-                    <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        strokeWidth={2}
-                        d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9v-9m0-9v9"
-                      />
-                    </svg>
-                    <span>Domains</span>
-                  </Link>
-                </nav>
+                    <FiEdit2 />
+                    <span>Reset Password</span>
+                  </button>
+                </div>
+
+                {/* Registration Date */}
+                <div className="flex justify-between items-center p-4 hover:bg-slate-50 rounded-xl transition-colors">
+                  <div className="flex items-center space-x-3">
+                    <FiCalendar className="text-slate-400 text-lg" />
+                    <div>
+                      <p className="font-semibold text-slate-900">Member Since</p>
+                      <p className="text-sm text-slate-600">
+                        {user?.created_at
+                          ? new Date(user.created_at).toLocaleDateString("en-US", {
+                              month: "long",
+                              day: "numeric",
+                              year: "numeric",
+                            })
+                          : "Unknown"}
+                      </p>
+                    </div>
+                  </div>
+                </div>
               </div>
             </div>
 
-            {/* Main Content */}
-            <div className="lg:col-span-2 space-y-6">
-              {/* Account Section */}
-              <div className="card p-6">
-                <h2 className="text-xl font-semibold text-slate-900 dark:text-white mb-6">
-                  ACCOUNT
-                </h2>
-                <div className="space-y-4">
-                  <div className="flex justify-between items-center py-3 border-b border-slate-200 dark:border-slate-700">
-                    <div>
-                      <p className="font-medium text-slate-900 dark:text-white">Full Name</p>
-                      <p className="text-slate-600 dark:text-slate-400">
-                        {user?.user_metadata?.full_name || "Not set"}
-                      </p>
-                    </div>
-                    <button className="text-red-600 dark:text-red-400 hover:text-red-800 dark:hover:text-red-300 font-medium">
-                      Edit
-                    </button>
-                  </div>
-
-                  <div className="flex justify-between items-center py-3 border-b border-slate-200 dark:border-slate-700">
-                    <div>
-                      <p className="font-medium text-slate-900 dark:text-white">Account Email</p>
-                      <p className="text-slate-600 dark:text-slate-400">{user?.email}</p>
-                    </div>
-                    <button className="text-red-600 dark:text-red-400 hover:text-red-800 dark:hover:text-red-300 font-medium">
-                      Edit
-                    </button>
-                  </div>
-
-                  <div className="flex justify-between items-center py-3 border-b border-slate-200 dark:border-slate-700">
-                    <div>
-                      <p className="font-medium text-slate-900 dark:text-white">Password</p>
-                      <p className="text-slate-600 dark:text-slate-400">••••••••••</p>
-                    </div>
-                    <button
-                      onClick={handlePasswordReset}
-                      className="text-red-600 dark:text-red-400 hover:text-red-800 dark:hover:text-red-300 font-medium"
-                    >
-                      Edit
-                    </button>
-                  </div>
-
-                  <div className="flex justify-between items-center py-3 border-b border-slate-200 dark:border-slate-700">
-                    <div>
-                      <p className="font-medium text-slate-900 dark:text-white">
-                        Two Factor Authentication
-                      </p>
-                      <span className="inline-block px-3 py-1 text-sm bg-slate-100 dark:bg-slate-700 text-slate-600 dark:text-slate-400 rounded-full">
-                        Disabled
-                      </span>
-                    </div>
-                    <button className="text-red-600 dark:text-red-400 hover:text-red-800 dark:hover:text-red-300 font-medium">
-                      Enable
-                    </button>
-                  </div>
-
-                  <div className="flex justify-between items-center py-3">
-                    <div>
-                      <p className="font-medium text-slate-900 dark:text-white">Registered on</p>
-                      <p className="text-slate-600 dark:text-slate-400">
-                        {user?.created_at ? new Date(user.created_at).toLocaleString() : "Unknown"}
-                      </p>
-                    </div>
-                    <button
-                      onClick={handleDeleteAccount}
-                      disabled={loading}
-                      className="text-red-600 dark:text-red-400 hover:text-red-800 dark:hover:text-red-300 font-medium disabled:opacity-50"
-                    >
-                      {loading ? "Deleting..." : "Delete account"}
-                    </button>
-                  </div>
+            {/* Usage Section */}
+            <div className="bg-white rounded-2xl shadow-sm border border-slate-100 p-6">
+              <div className="flex items-center space-x-3 mb-6">
+                <div className="w-10 h-10 bg-purple-100 rounded-xl flex items-center justify-center">
+                  <FiBarChart2 className="text-purple-600 text-lg" />
                 </div>
+                <h2 className="text-2xl font-bold text-slate-900">Usage Statistics</h2>
               </div>
 
-              {/* Usage Section */}
-              <div className="card p-6">
-                <h2 className="text-xl font-semibold text-slate-900 dark:text-white mb-6">USAGE</h2>
-                <div className="space-y-4">
-                  <div>
-                    <div className="flex justify-between items-center mb-2">
-                      <p className="font-medium text-slate-900 dark:text-white">
-                        Monthly Submissions
-                      </p>
-                      <p className="text-slate-600 dark:text-slate-400">
-                        {stats.monthlySubmissions} / 50
-                      </p>
+              <div className="space-y-6">
+                {/* Monthly Submissions */}
+                <div>
+                  <div className="flex justify-between items-center mb-3">
+                    <div className="flex items-center space-x-2">
+                      <FiTrendingUp className="text-indigo-600" />
+                      <p className="font-semibold text-slate-900">Monthly Submissions</p>
                     </div>
-                    <div className="w-full bg-slate-200 dark:bg-slate-700 rounded-full h-2">
-                      <div
-                        className="bg-blue-600 h-2 rounded-full transition-all duration-300"
-                        style={{
-                          width: `${Math.min((stats.monthlySubmissions / 50) * 100, 100)}%`,
-                        }}
-                      ></div>
-                    </div>
-                    <p className="text-sm text-slate-600 dark:text-slate-400 mt-1">
-                      {Math.round((stats.monthlySubmissions / 50) * 100)}% of monthly submissions
-                      quota used
+                    <p className="text-slate-600 font-medium">{stats.monthlySubmissions} / 150</p>
+                  </div>
+                  <div className="w-full bg-slate-200 rounded-full h-3">
+                    <div
+                      className="bg-gradient-to-r from-indigo-600 to-purple-600 h-3 rounded-full transition-all duration-300"
+                      style={{
+                        width: `${Math.min((stats.monthlySubmissions / 150) * 100, 100)}%`,
+                      }}
+                    ></div>
+                  </div>
+                  <div className="flex justify-between items-center mt-2">
+                    <p className="text-sm text-slate-600">
+                      {Math.round((stats.monthlySubmissions / 150) * 100)}% of monthly quota used
                     </p>
                   </div>
                 </div>
-              </div>
 
-              {/* Linked Emails Section */}
-              <div className="card p-6">
-                <div className="flex justify-between items-center mb-6">
-                  <h2 className="text-xl font-semibold text-slate-900 dark:text-white">
-                    LINKED EMAILS
-                  </h2>
-                  <button className="px-4 py-2 bg-red-600 hover:bg-red-700 text-white rounded-lg font-medium transition-colors">
-                    + Add Email
-                  </button>
-                </div>
-                <div className="space-y-4">
-                  <div className="flex justify-between items-center py-3 border-b border-slate-200 dark:border-slate-700">
+                {/* Feature List */}
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                  <div className="flex items-start space-x-3 p-4 bg-slate-50 rounded-xl">
+                    <FiCheckCircle className="text-emerald-500 text-xl mt-0.5" />
                     <div>
-                      <p className="font-medium text-slate-900 dark:text-white">{user?.email}</p>
+                      <p className="font-semibold text-slate-900">Unlimited Forms</p>
+                      <p className="text-sm text-slate-600">Create as many forms as you need</p>
                     </div>
-                    <span className="inline-block px-3 py-1 text-sm bg-green-100 dark:bg-green-900/20 text-green-600 dark:text-green-400 rounded-full">
-                      VERIFIED
-                    </span>
                   </div>
-                  <p className="text-sm text-slate-600 dark:text-slate-400">
-                    1 of 2 email addresses added.{" "}
-                    <span className="text-red-600 dark:text-red-400 font-medium">Upgrade</span> to
-                    add unlimited addresses.
-                  </p>
+                  <div className="flex items-start space-x-3 p-4 bg-slate-50 rounded-xl">
+                    <FiCheckCircle className="text-emerald-500 text-xl mt-0.5" />
+                    <div>
+                      <p className="font-semibold text-slate-900">Email Notifications</p>
+                      <p className="text-sm text-slate-600">Instant submission alerts</p>
+                    </div>
+                  </div>
                 </div>
               </div>
+            </div>
 
-              {/* Upgrade Section */}
-              <div className="card p-6">
-                <div className="flex justify-between items-start">
-                  <div className="flex-1">
-                    <h2 className="text-xl font-semibold text-slate-900 dark:text-white mb-4">
-                      Upgrade your account for:
-                    </h2>
-                    <ul className="space-y-2 text-slate-600 dark:text-slate-400">
-                      <li className="flex items-center space-x-2">
-                        <span className="text-slate-400">1.</span>
-                        <span>File upload</span>
-                      </li>
-                      <li className="flex items-center space-x-2">
-                        <span className="text-slate-400">2.</span>
-                        <span>More submissions</span>
-                      </li>
-                      <li className="flex items-center space-x-2">
-                        <span className="text-slate-400">3.</span>
-                        <span>Custom "thank you" redirect</span>
-                      </li>
-                      <li className="flex items-center space-x-2">
-                        <span className="text-slate-400">4.</span>
-                        <span>Plugins like Google Sheets, Mailchimp and Stripe</span>
-                      </li>
-                      <li className="flex items-center space-x-2">
-                        <span className="text-slate-400">5.</span>
-                        <span>Improved spam filtering</span>
-                      </li>
-                      <li className="flex items-center space-x-2">
-                        <span className="text-slate-400">6.</span>
-                        <span>API access</span>
-                      </li>
-                      <li className="text-slate-600 dark:text-slate-400">... and more!</li>
-                    </ul>
+            {/* Security Section */}
+            <div className="bg-white rounded-2xl shadow-sm border border-slate-100 p-6">
+              <div className="flex items-center space-x-3 mb-6">
+                <div className="w-10 h-10 bg-red-100 rounded-xl flex items-center justify-center">
+                  <FiShield className="text-red-600 text-lg" />
+                </div>
+                <h2 className="text-2xl font-bold text-slate-900">Security & Privacy</h2>
+              </div>
+
+              {/* Danger Zone */}
+              <div className="bg-red-50 border border-red-200 rounded-xl p-6">
+                <div className="flex items-start justify-between gap-4">
+                  <div className="flex items-start space-x-3 flex-1">
+                    <FiAlertCircle className="text-red-600 text-2xl mt-0.5 flex-shrink-0" />
+                    <div>
+                      <h3 className="font-bold text-red-900 mb-2 text-lg">Delete Account</h3>
+                      <p className="text-sm text-red-700 mb-4">
+                        Once you delete your account, there is no going back. This will permanently
+                        delete all your forms, submissions, and data. Please be certain.
+                      </p>
+                      <button
+                        onClick={handleDeleteAccount}
+                        disabled={loading}
+                        className="flex items-center space-x-2 bg-red-600 hover:bg-red-700 text-white px-5 py-2.5 rounded-lg font-semibold transition-colors disabled:opacity-50"
+                      >
+                        <FiTrash2 />
+                        <span>{loading ? "Deleting..." : "Delete My Account"}</span>
+                      </button>
+                    </div>
                   </div>
-                  <button className="px-6 py-3 bg-red-600 hover:bg-red-700 text-white rounded-lg font-medium transition-colors ml-6">
-                    See Plans
-                  </button>
                 </div>
               </div>
             </div>

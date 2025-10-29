@@ -27,7 +27,9 @@ export default function ContactPage() {
       setStatus("error");
     } else {
       setStatus("sent");
-      router.push("/");
+      setTimeout(() => {
+        router.push("/");
+      }, 3000);
       setForm({ name: "", email: "", subject: "", message: "" });
     }
   };
@@ -48,11 +50,11 @@ export default function ContactPage() {
                 <p className="text-xs text-slate-500">Lead Management</p>
               </div>
             </div>
-    
-            <div className="flex items-center space-x-4">
+
+            <div className="flex items-center space-x-6">
               <Link
                 href="/"
-                className="text-slate-600 dark:text-slate-300 hover:text-slate-800 dark:hover:text-white transition-colors"
+                className="flex items-center space-x-2 text-slate-600 hover:text-indigo-600 transition-colors font-medium"
               >
                 Home
               </Link>

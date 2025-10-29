@@ -85,16 +85,16 @@ export default function DemoPage() {
               </div>
             </div>
 
-            <div className="flex items-center space-x-4">
+            <div className="flex items-center space-x-6">
               <Link
                 href="/"
-                className="text-slate-600 dark:text-slate-300 hover:text-slate-800 dark:hover:text-white transition-colors"
+                className="flex items-center space-x-2 text-slate-600 hover:text-indigo-600 transition-colors font-medium"
               >
                 Home
               </Link>
               <Link
                 href="/login"
-                className="text-slate-600 dark:text-slate-300 hover:text-slate-800 dark:hover:text-white transition-colors"
+                className="flex items-center space-x-2 text-slate-600 hover:text-indigo-600 transition-colors font-medium"
               >
                 Login
               </Link>
@@ -300,7 +300,7 @@ export default function DemoPage() {
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            <div className="text-center">
+            <div className="text-center bg-white p-6 shadow-lg rounded-lg">
               <div className="w-16 h-16 bg-blue-100 dark:bg-blue-900/20 rounded-2xl flex items-center justify-center mx-auto mb-6">
                 <svg
                   className="w-8 h-8 text-blue-600"
@@ -325,7 +325,7 @@ export default function DemoPage() {
               </p>
             </div>
 
-            <div className="text-center">
+            <div className="text-center bg-white p-6 shadow-lg rounded-lg">
               <div className="w-16 h-16 bg-purple-100 dark:bg-purple-900/20 rounded-2xl flex items-center justify-center mx-auto mb-6">
                 <svg
                   className="w-8 h-8 text-purple-600"
@@ -350,7 +350,7 @@ export default function DemoPage() {
               </p>
             </div>
 
-            <div className="text-center">
+            <div className="text-center bg-white p-6 shadow-lg rounded-lg">
               <div className="w-16 h-16 bg-green-100 dark:bg-green-900/20 rounded-2xl flex items-center justify-center mx-auto mb-6">
                 <svg
                   className="w-8 h-8 text-green-600"

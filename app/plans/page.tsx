@@ -9,7 +9,7 @@ const plans = [
     name: "PERSONAL",
     price: 5,
     description: "For personal or portfolio sites",
-    submissions: "200",
+    submissions: "150",
     forms: "∞",
     projects: "∞",
     team: "1",
@@ -65,16 +65,16 @@ export default function PlansPage() {
               </div>
             </div>
 
-            <div className="flex items-center space-x-4">
+            <div className="flex items-center space-x-6">
               <Link
                 href="/"
-                className="text-slate-600 dark:text-slate-300 hover:text-slate-800 dark:hover:text-white transition-colors"
+                className="flex items-center space-x-2 text-slate-600 hover:text-indigo-600 transition-colors font-medium"
               >
                 Home
               </Link>
               <Link
                 href="/login"
-                className="text-slate-600 dark:text-slate-300 hover:text-slate-800 dark:hover:text-white transition-colors"
+                className="flex items-center space-x-2 text-slate-600 hover:text-indigo-600 transition-colors font-medium"
               >
                 Login
               </Link>

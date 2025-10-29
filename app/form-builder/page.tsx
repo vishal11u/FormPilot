@@ -5,6 +5,7 @@ import Link from "next/link";
 import { supabase } from "../../lib/supabaseClient";
 import { useAuth } from "../../lib/authContext";
 import ProtectedRoute from "../../components/ProtectedRoute";
+import { FiFileText, FiInbox, FiLogOut, FiMenu, FiUser } from "react-icons/fi";
 
 function generateFormId() {
   return Math.random().toString(36).substring(2, 8);
@@ -12,11 +13,12 @@ function generateFormId() {
 
 export default function FormBuilderPage() {
   const router = useRouter();
-  const { user } = useAuth();
+  const { user, signOut } = useAuth();
   const [notifyEmail, setNotifyEmail] = useState("");
   const [redirectUrl, setRedirectUrl] = useState("");
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   const handleCreate = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -44,19 +46,24 @@ export default function FormBuilderPage() {
     else router.push("/dashboard");
   };
 
+  const handleLogout = async () => {
+    await signOut();
+  };
+
   return (
     <ProtectedRoute>
       <div className="min-h-screen bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-100 dark:from-slate-900 dark:via-slate-800 dark:to-indigo-900">
         {/* Navigation */}
-        <nav className="bg-white/80 dark:bg-slate-800/80 backdrop-blur-md border-b border-slate-200 dark:border-slate-700 sticky top-0 z-50">
+        <nav className="bg-white/80 backdrop-blur-xl border-b border-slate-200 sticky top-0 z-50 shadow-sm">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="flex justify-between items-center h-16">
+              {/* Logo */}
               <div
                 className="flex items-center space-x-3 cursor-pointer"
-                onClick={() => router.push("/")}
+                onClick={() => router.push("/dashboard")}
               >
-                <div className="w-10 h-10 bg-gradient-to-r from-blue-600 to-purple-600 rounded-xl flex items-center justify-center shadow-lg">
-                  <span className="text-white font-bold text-xl">F</span>
+                <div className="w-10 h-10 bg-gradient-to-br from-indigo-600 to-purple-600 rounded-xl flex items-center justify-center shadow-lg">
+                  <FiFileText className="text-white text-xl" />
                 </div>
                 <div>
                   <span className="text-xl font-bold bg-gradient-to-r from-indigo-600 to-purple-600 bg-clip-text text-transparent">
@@ -66,21 +73,78 @@ export default function FormBuilderPage() {
                 </div>
               </div>
 
-              <div className="flex items-center space-x-4">
+              {/* Desktop Navigation */}
+              <div className="hidden md:flex items-center space-x-6">
                 <Link
                   href="/dashboard"
-                  className="text-indigo-600 dark:text-slate-300 hover:text-slate-800 dark:hover:text-white transition-colors font-medium"
+                  className="flex items-center space-x-2 text-slate-600 hover:text-indigo-600 font-semibold transition-colors"
                 >
-                  Dashboard
+                  <span>Dashboard</span>
                 </Link>
                 <Link
-                  href="/"
-                  className="text-indigo-600 dark:text-slate-300 hover:text-slate-800 dark:hover:text-white transition-colors font-medium"
+                  href="/account"
+                  className="flex items-center space-x-2 text-slate-600 hover:text-indigo-600 transition-colors font-medium"
                 >
-                  Home
+                  <span>Account</span>
                 </Link>
+                <button
+                  onClick={handleLogout}
+                  className="flex items-center space-x-2 text-slate-600 hover:text-red-600 transition-colors font-medium"
+                >
+                  <span>Logout</span>
+                </button>
+                <div className="flex items-center space-x-3 pl-4 border-l border-slate-200">
+                  <div className="w-10 h-10 flex items-center justify-center rounded-full bg-gradient-to-br from-indigo-600 to-purple-600 text-white font-semibold shadow-md">
+                    {user?.email?.charAt(0).toUpperCase()}
+                  </div>
+                  <div className="hidden lg:block">
+                    <p className="text-sm font-medium text-slate-700">{user?.email}</p>
+                    <p className="text-xs text-slate-500">Admin</p>
+                  </div>
+                </div>
               </div>
+
+              {/* Mobile Menu Button */}
+              <button
+                onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+                className="md:hidden text-slate-600 hover:text-slate-900 p-2"
+              >
+                <FiMenu className="text-2xl" />
+              </button>
             </div>
+
+            {/* Mobile Menu */}
+            {mobileMenuOpen && (
+              <div className="md:hidden py-4 border-t border-slate-200">
+                <div className="space-y-2">
+                  <div className="px-4 py-3 bg-indigo-50 rounded-lg mb-3">
+                    <p className="text-sm font-medium text-slate-700">{user?.email}</p>
+                    <p className="text-xs text-slate-500">Admin Account</p>
+                  </div>
+                  <Link
+                    href="/dashboard"
+                    className="flex items-center space-x-3 px-4 py-3 bg-indigo-50 text-indigo-600 rounded-lg transition-colors font-semibold"
+                  >
+                    <FiInbox className="text-xl" />
+                    <span>Dashboard</span>
+                  </Link>
+                  <Link
+                    href="/account"
+                    className="flex items-center space-x-3 px-4 py-3 text-slate-700 hover:bg-slate-50 rounded-lg transition-colors"
+                  >
+                    <FiUser className="text-xl" />
+                    <span className="font-medium">Account</span>
+                  </Link>
+                  <button
+                    onClick={handleLogout}
+                    className="flex items-center space-x-3 px-4 py-3 text-red-600 hover:bg-red-50 rounded-lg transition-colors w-full"
+                  >
+                    <FiLogOut className="text-xl" />
+                    <span className="font-medium">Logout</span>
+                  </button>
+                </div>
+              </div>
+            )}
           </div>
         </nav>
 
