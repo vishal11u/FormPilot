@@ -125,7 +125,7 @@ export default function Home() {
       {/* Hero Section */}
       <section className="pt-32 pb-20 px-4 sm:px-6 lg:px-8">
         <div className="max-w-7xl mx-auto">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-11 items-center">
             {/* Left Side - Content */}
             <motion.div
               className="space-y-8"
@@ -134,21 +134,21 @@ export default function Home() {
               transition={{ duration: 0.8 }}
             >
               <h1 className="text-5xl md:text-6xl font-bold text-slate-900 dark:text-white leading-tight">
-                The form solution for <span className="text-indigo-600">everyone</span>
+                The Form Solution For <span className="text-indigo-600">Everyone</span>
               </h1>
               <p className="text-xl text-slate-600 dark:text-slate-400 max-w-2xl leading-relaxed">
-                Use your own frontend code. Submit to our API. We'll handle the rest.
+                Use your own Frontend Code. Submit to our API. We'll handle the rest.
               </p>
               <div className="flex flex-col sm:flex-row gap-4">
                 <Link
                   href="/signup"
-                  className="bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white px-8 py-4 rounded-lg font-semibold text-lg transition-all duration-200 shadow-lg hover:shadow-xl transform hover:-translate-y-0.5 inline-flex items-center justify-center"
+                  className="bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white px-8 py-2.5 rounded-lg font-semibold text-lg transition-all duration-200 shadow-lg hover:shadow-xl transform hover:-translate-y-0.5 inline-flex items-center justify-center"
                 >
                   Get Started
                 </Link>
                 <Link
                   href="/demo"
-                  className="border-2 border-slate-300 dark:border-slate-600 text-slate-700 dark:text-slate-300 px-8 py-4 rounded-lg font-semibold text-lg transition-all duration-200 hover:border-slate-400 dark:hover:border-slate-500 hover:text-slate-900 dark:hover:text-white inline-flex items-center justify-center"
+                  className="border-2 border-slate-300 dark:border-slate-600 text-slate-700 dark:text-slate-300 px-8 py-2.5 rounded-lg font-semibold text-lg transition-all duration-200 hover:border-slate-400 dark:hover:border-slate-500 hover:text-slate-900 dark:hover:text-white inline-flex items-center justify-center"
                 >
                   View Demo
                 </Link>

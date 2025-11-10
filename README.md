@@ -1,141 +1,111 @@
-# FormPilot
-
 # FormPilot 🚀
 
-A full-stack form submission SaaS platform like Formspree.
+FormPilot is a full-stack form submission SaaS platform that allows you to create, manage, and analyze form submissions easily. It provides a public API endpoint for form submissions and an embeddable code for easy integration into your website.
 
-> [Add a short, one-sentence description of your project here. What problem does it solve?]
-
-## Features
-
----
-
-- User authentication (Supabase Auth)
-- Create and manage forms
-- Public API endpoint for form submissions
-- Embed code for easy integration
+![](landing.png)
 
 ## ✨ Features
 
-## Setup
-
-- **Feature A:** Briefly describe the feature.
-- **Feature B:** Briefly describe the feature.
-- **Feature C:** Briefly describe the feature.
-
-1. **Clone the repo and install dependencies:**
+- **User Authentication**: Secure user authentication using Clerk.
+- **Form Creation and Management**: Easily create and manage forms from the dashboard.
+- **Form Submission API**: A public API endpoint to handle form submissions.
+- **Embeddable Forms**: Simple-to-use embed code for seamless integration with your website.
+- **Submission Management**: View and manage all your form submissions in one place.
+- **Spam Protection**: Honeypot implementation to protect against spam bots.
+- **Redirects**: Redirect users to a specific URL after a successful form submission.
+- **Dark Mode**: A beautiful dark mode for a better user experience.
 
 ## 🛠️ Technical Stack
 
-```bash
-npm install
-```
-
-- **Framework:** [Next.js](https://nextjs.org/)
-- **Language:** [TypeScript](https://www.typescriptlang.org/)
-- **Styling:** [Add your styling solution, e.g., Tailwind CSS, CSS Modules]
-- **Linting:** [ESLint](https://eslint.org/)
-- **Formatting:** [Prettier](https://prettier.io/)
-- **Testing:** [Jest](https://jestjs.io/)
-
-2. **Set up Supabase:**
-   - Create a project at [supabase.com](https://supabase.com/)
-   - Get your `SUPABASE_URL` and `SUPABASE_ANON_KEY`
-   - Create the following tables in the SQL editor:
+- **Framework**: [Next.js](https://nextjs.org/)
+- **Language**: [TypeScript](https://www.typescriptlang.org/)
+- **Authentication**: [Clerk](https://clerk.com/)
+- **Database**: [Supabase](https://supabase.com/)
+- **Styling**: [Tailwind CSS](https://tailwindcss.com/)
+- **UI Components**: [Radix UI](https://www.radix-ui.com/)
+- **Linting**: [ESLint](https://eslint.org/)
+- **Formatting**: [Prettier](https://prettier.io/)
+- **Testing**: [Jest](https://jestjs.io/)
 
 ## ⚙️ Getting Started
 
-```sql
-create table forms (
-  id uuid primary key default uuid_generate_v4(),
-  form_id text unique not null,
-  user_id uuid references auth.users(id),
-  notify_email text not null,
-  redirect_url text,
-  created_at timestamp with time zone default timezone('utc'::text, now())
-);
 Follow these instructions to get a copy of the project up and running on your local machine for development and testing purposes.
 
-create table submissions (
-  id uuid primary key default uuid_generate_v4(),
-  form_id text references forms(form_id),
-  name text,
-  email text,
-  mobile text,
-  remark text,
-  created_at timestamp with time zone default timezone('utc'::text, now())
-);
-```
-
 ### Prerequisites
-
-3. **Configure environment variables:**
-   - Copy `.env.local.example` to `.env.local` and fill in your Supabase credentials.
 
 - Node.js (v18.x or later)
 - npm or yarn
 
-```
-NEXT_PUBLIC_SUPABASE_URL=your_supabase_url
-NEXT_PUBLIC_SUPABASE_ANON_KEY=your_supabase_anon_key
-```
-
 ### Installation
 
-4. **Run the development server:**
-1. Clone the repository:
-   ```sh
-   git clone https://github.com/vishal11u/FormPilot.git
-   cd FormPilot
-   ```
+1.  **Clone the repository:**
 
-```bash
-npm run dev
-```
+    ```sh
+    git clone https://github.com/your-username/FormPilot.git
+    cd FormPilot
+    ```
 
-2.  Install the dependencies:
+2.  **Install the dependencies:**
 
     ```sh
     npm install
     ```
 
-3.  **Visit the app:**
-    - Open [http://localhost:3000](http://localhost:3000)
-4.  Run the development server:
-    ```sh
+3.  **Set up your environment variables:**
+
+    Create a `.env.local` file in the root of your project and add the following environment variables. You can get these from your Supabase and Clerk dashboards.
+
+    ```
+    NEXT_PUBLIC_SUPABASE_URL=your_supabase_url
+    NEXT_PUBLIC_SUPABASE_ANON_KEY=your_supabase_anon_key
+    SUPABASE_SERVICE_ROLE_KEY=your_supabase_service_role_key
+
+    NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY=your_clerk_publishable_key
+    CLERK_SECRET_KEY=your_clerk_secret_key
+    ```
+
+4.  **Set up the database:**
+
+    Run the following SQL queries in your Supabase SQL editor to create the necessary tables:
+
+    ```sql
+    create table forms (
+      id uuid primary key default uuid_generate_v4(),
+      form_id text unique not null,
+      user_id uuid references auth.users(id),
+      notify_email text not null,
+      redirect_url text,
+      created_at timestamp with time zone default timezone('utc'::text, now())
+    );
+
+    create table submissions (
+      id uuid primary key default uuid_generate_v4(),
+      form_id text references forms(form_id),
+      name text,
+      email text,
+      mobile text,
+      remark text,
+      created_at timestamp with time zone default timezone('utc'::text, now())
+    );
+    ```
+
+5.  **Run the development server:**
+
+    ```bash
     npm run dev
     ```
 
+    Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+
 ## Usage
 
-- Sign up and log in
-- Create forms in the dashboard
-- Copy the embed code and use it in your site
-- Submissions will be saved in Supabase
+1.  **Sign up and log in.**
+2.  **Create a new form** from the dashboard.
+3.  **Copy the form submission URL** and use it as the `action` attribute in your HTML form.
+4.  **Submissions will be saved** in your Supabase database and can be viewed on the submissions page.
 
-## Dynamic Domain Support
+## 🚀 Deployment
 
-FormPilot automatically detects your domain and generates the correct embed codes:
+The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
 
-- **Development**: Uses `http://localhost:3000` when running locally
-- **Production**: Automatically uses your actual domain when hosted
-- **No configuration needed**: Works seamlessly across environments
-
-### How it works:
-
-1. **Client-side detection**: Automatically detects the current domain
-2. **Environment variables**: Falls back to `NEXT_PUBLIC_BASE_URL` or `VERCEL_URL` if set
-3. **Smart fallback**: Defaults to localhost for development
-4. **Automatic updates**: Embed codes always use the correct domain
-
-### Environment Variables (Optional):
-
-```bash
-# For custom domain
-NEXT_PUBLIC_BASE_URL=https://yourdomain.com
-
-# For Vercel deployment (auto-detected)
-VERCEL_URL=https://yourproject.vercel.app
-```
-
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Check out the [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
