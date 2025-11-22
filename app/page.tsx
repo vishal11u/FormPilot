@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { motion } from "framer-motion";
+import { ThemeToggle } from "@/components/ThemeToggle";
 
 export default function Home() {
   return (
@@ -88,6 +89,7 @@ export default function Home() {
 
                 <span className="absolute inset-0 rounded-lg bg-white/20 opacity-0 hover:opacity-30 transition-opacity duration-300"></span>
               </Link>
+              <ThemeToggle />
             </motion.div>
           </div>
 
@@ -630,7 +632,6 @@ export default function Home() {
       </section>
 
       {/* Pricing Section */}
-      
 
       {/* CTA Section */}
       <section className="py-20 px-4 sm:px-6 lg:px-8 bg-slate-50 dark:bg-slate-800/50">
@@ -669,7 +670,6 @@ export default function Home() {
           </motion.div>
         </div>
       </section>
-      
 
       {/* Footer */}
       <footer className="bg-slate-900 text-white py-14 px-4 sm:px-6 lg:px-8">

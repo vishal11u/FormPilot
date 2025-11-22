@@ -5,6 +5,7 @@ import { createClient } from "@supabase/supabase-js";
 import { supabase } from "@/lib/supabaseClient";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
+import { ThemeToggle } from "@/components/ThemeToggle";
 
 export default function ContactPage() {
   const [status, setStatus] = useState<"idle" | "sending" | "sent" | "error">("idle");
@@ -62,6 +63,7 @@ export default function ContactPage() {
               <Link href="/signup" className="btn-primary">
                 Get Started
               </Link>
+              <ThemeToggle />
             </div>
           </div>
         </div>

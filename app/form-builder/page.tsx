@@ -5,6 +5,7 @@ import Link from "next/link";
 import { supabase } from "../../lib/supabaseClient";
 import { useAuth } from "../../lib/authContext";
 import ProtectedRoute from "../../components/ProtectedRoute";
+import { ThemeToggle } from "../../components/ThemeToggle";
 import { FiFileText, FiInbox, FiLogOut, FiMenu, FiUser } from "react-icons/fi";
 
 function generateFormId() {
@@ -102,6 +103,7 @@ export default function FormBuilderPage() {
                     <p className="text-xs text-slate-500">Admin</p>
                   </div>
                 </div>
+                <ThemeToggle />
               </div>
 
               {/* Mobile Menu Button */}

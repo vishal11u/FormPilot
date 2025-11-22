@@ -6,6 +6,7 @@ import { useParams, useRouter } from "next/navigation";
 import { supabase } from "../../../lib/supabaseClient";
 import { useAuth } from "../../../lib/authContext";
 import ProtectedRoute from "../../../components/ProtectedRoute";
+import { ThemeToggle } from "../../../components/ThemeToggle";
 import { getFormSubmissionUrl } from "../../../lib/utils";
 import {
   FiArrowLeft,
@@ -192,6 +193,7 @@ export default function FormOverviewPage() {
                     <p className="text-xs text-slate-500">Admin</p>
                   </div>
                 </div>
+                <ThemeToggle />
               </div>
 
               <button

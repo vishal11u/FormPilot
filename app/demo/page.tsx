@@ -2,6 +2,8 @@
 import { useState } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
+import { supabase } from "@/lib/supabaseClient";
+import { ThemeToggle } from "@/components/ThemeToggle";
 
 export default function DemoPage() {
   const [formData, setFormData] = useState({
@@ -101,6 +103,7 @@ export default function DemoPage() {
               <Link href="/signup" className="btn-primary">
                 Get Started
               </Link>
+              <ThemeToggle />
             </div>
           </div>
         </div>

@@ -5,6 +5,7 @@ import { supabase } from "../../lib/supabaseClient";
 import { useAuth } from "../../lib/authContext";
 import ProtectedRoute from "../../components/ProtectedRoute";
 import { getFormSubmissionUrl } from "../../lib/utils";
+import { ThemeToggle } from "@/components/ThemeToggle";
 import {
   FiMenu,
   FiPlus,
@@ -132,14 +133,15 @@ export default function DashboardPage() {
                     <span>Logout</span>
                   </button>
                   <div className="flex items-center space-x-3 pl-4 border-l border-slate-200">
-                    <div className="w-10 h-10 flex items-center justify-center rounded-full bg-gradient-to-br from-indigo-600 to-purple-600 text-white font-semibold shadow-md">
-                      {user?.email?.charAt(0).toUpperCase()}
-                    </div>
-                    <div className="hidden lg:block">
-                      <p className="text-sm font-medium text-slate-700">{user?.email}</p>
-                      <p className="text-xs text-slate-500">Admin</p>
-                    </div>
+                  <div className="w-10 h-10 flex items-center justify-center rounded-full bg-gradient-to-br from-indigo-600 to-purple-600 text-white font-semibold shadow-md">
+                    {user?.email?.charAt(0).toUpperCase()}
                   </div>
+                  <div className="hidden lg:block">
+                    <p className="text-sm font-medium text-slate-700">{user?.email}</p>
+                    <p className="text-xs text-slate-500">Admin</p>
+                  </div>
+                </div>
+                <ThemeToggle />
                 </div>
 
                 {/* Mobile Menu Button */}

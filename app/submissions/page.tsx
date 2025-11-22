@@ -1,10 +1,11 @@
 "use client";
-import { useEffect, useState } from "react";
 import Link from "next/link";
+import { useEffect, useState } from "react";
 import { supabase } from "../../lib/supabaseClient";
 import { useAuth } from "../../lib/authContext";
 import ProtectedRoute from "../../components/ProtectedRoute";
 import { useRouter } from "next/navigation";
+import { ThemeToggle } from "../../components/ThemeToggle";
 import {
   FiInbox,
   FiLogOut,
@@ -233,6 +234,7 @@ export default function SubmissionsPage() {
                     <p className="text-xs text-slate-500">Admin</p>
                   </div>
                 </div>
+                <ThemeToggle />
               </div>
 
               {/* Mobile Menu Button */}
